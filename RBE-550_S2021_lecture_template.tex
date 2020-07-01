@@ -1,0 +1,191 @@
+\documentclass[aspectratio=169]{beamer}
+
+
+% Get rid of ugly navigation buttons
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[utf8]{inputenc}
+
+
+\usepackage[default]{comfortaa}
+\usepackage[lf]{electrum}
+\usepackage{inconsolata}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{lipsum}
+
+\usepackage{epigraph}
+\usepackage{xcolor}
+
+% Define colors
+\definecolor{WPIgray}{RGB}{109,109,109}
+\definecolor{WPIcrimson}{RGB}{171,25,45}
+\definecolor{WPIgrayCrimson}{RGB}{103,15,27}
+\definecolor{SikBlue}{RGB}{34,53,102}
+\definecolor{brightOranage}{RGB}{202,67,0}
+
+
+\usepackage{datetime2}
+\mode<presentation>
+{
+  \usetheme{Marburg}
+  \usecolortheme[RGB={171,25,45}]{structure}
+  \setbeamercolor{alerted text}{fg=WPIcrimson}
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+
+
+\setbeamertemplate{sidebar canvas %
+right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
+\usepackage[english]{babel}
+% or whatever
+
+
+
+% garamond, futura/optima
+% try fourier, \danger
+% \usepackage{palatino} 
+
+
+% \usepackage{helvet}
+% \usepackage{sourcecodepro}
+% \usepackage{fourier}
+% \usepackage{ccfonts}
+
+% \usepackage{euler}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+% FIXME: get electrum font working!
+\setbeamerfont{title}{family=\fontfamily{comfortaa}\selectfont, shape=\normalfont}
+\setbeamerfont{frametitle}{family=\fontfamily{comfortaa}\selectfont}
+\setbeamerfont{framesubtitle}{family=\fontfamily{comfortaa}\selectfont}
+\setbeamerfont{normal text}{family=\fontfamily{inconsolata}\selectfont}
+% \renewcommand{\sfdefault}{inconsolata}
+
+% \usefonttheme{professionalfonts}
+\usefonttheme[stillsansseriftext,stillsansseriftitle]{serif}
+% \usefonttheme[stillserifsmall,stillseriflarge,stillsansseriftext]{structurebold}
+
+
+% \usepackage{ graphics,array,ifthen }
+\usepackage{ graphicx,array,ifthen }
+
+\usepackage{ fancybox }
+% \usepackage{ picins }
+
+
+\usepackage{hyperref}
+
+% Colors, flowcharts
+\usepackage{color,colortbl}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+
+% FIXME: change lecture title here
+\title[\scalebox{2}{\insertlogo}]{Lecture Template}
+
+
+
+\author[]{\textbf{Daniel~Montrallo~Flickinger, PhD}}
+\institute[]%
+{\includegraphics[width=0.4\textwidth]{fig/WPI_Inst_Prim_FulClr.png}
+}
+\date{\today}
+
+% FIXME: insert date, not today
+
+% 
+% \pgfdeclareimage[width=\paperwidth]{mybackground}{fig/background_blue.jpg}
+% 
+% \setbeamertemplate{title page}{
+%     
+%     \begin{picture}(0,0)
+%         \put(-30,-163){%
+%             \pgfuseimage{mybackground}
+%         }
+%         
+%         \put(0,-110.7){%
+%             \begin{minipage}[b][45mm][t]{226mm}
+%                 \usebeamerfont{title}{\inserttitle\par}
+%             \end{minipage}
+%         }
+% 
+%     \end{picture}
+% }
+
+% 
+% \usebackgroundtemplate%
+% {%
+% \includegraphics[height=\paperheight]{}%
+% }
+
+% \logo{\includegraphics[height=0.5cm]{}}
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSection[]
+{
+    {
+        \setbeamercolor{background canvas}{bg=WPIcrimson}
+        \setbeamercolor{normal text}{fg=WPIgray}
+        \setbeamercolor{structure}{fg=white}
+        
+
+        \begin{frame}<beamer>
+%     \frametitle{Outline}
+            
+            \begin{columns}
+                \begin{column}{0.45\textwidth}
+                
+
+            \tableofcontents[currentsection,hideallsubsections]
+%         \tableofcontents[currentsection,currentsubsection,hideallsubsections]
+            
+        \end{column}
+        \begin{column}{0.55\textwidth}
+            
+\noindent
+\hfill
+\includegraphics[width=\columnwidth]{fig/WPI_background_logo_corner.png}
+            
+        \end{column}
+        \end{columns}
+
+        \end{frame}
+    }
+}
+
+
+\begin{document}
+
+
+
+
+\begin{frame}[label=ROOT]
+  \titlepage
+\end{frame}
+
+\include{slides}
+
+
+\setbeamercolor{background canvas}{bg=WPIcrimson}
+\begin{frame}[label=finalframe]
+ 
+
+\begin{center}
+\includegraphics[height=\textheight]{fig/WPI_background_logo.png}
+\end{center}
+
+\end{frame}
+
+ 
+ 
+
+\end{document}
