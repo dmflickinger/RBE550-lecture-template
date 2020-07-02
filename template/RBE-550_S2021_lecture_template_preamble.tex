@@ -4,6 +4,9 @@
 % Get rid of ugly navigation buttons
 \setbeamertemplate{navigation symbols}{}
 
+
+\usepackage{listings}
+
 \usepackage[utf8]{inputenc}
 
 
@@ -51,7 +54,7 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
 % \usepackage{helvet}
-% \usepackage{sourcecodepro}
+\usepackage{sourcecodepro}
 \usepackage{fourier}
 % \usepackage{ccfonts}
 
@@ -60,9 +63,9 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 % FIXME: get electrum font working!
 \setbeamerfont{title}{family=\fontfamily{comfortaa}\selectfont, shape=\normalfont}
-\setbeamerfont{frametitle}{family=\fontfamily{comfortaa}\selectfont}
-\setbeamerfont{framesubtitle}{family=\fontfamily{comfortaa}\selectfont}
-\setbeamerfont{normal text}{family=\fontfamily{inconsolata}\selectfont}
+\setbeamerfont{frametitle}{family=\fontfamily{yes}\selectfont}
+\setbeamerfont{framesubtitle}{family=\fontfamily{yes}\selectfont}
+\setbeamerfont{normal text}{family=\fontfamily{sansserif}\selectfont}
 % \renewcommand{\sfdefault}{inconsolata}
 
 % \usefonttheme{professionalfonts}
@@ -87,46 +90,24 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
 % FIXME: change lecture title here
-\title[\scalebox{2}{\insertlogo}]{[\lecturenumber] Lecture Template}
+\title[\scalebox{2}{\insertlogo}]{\lecturetitle\\\small{Lecture \lecturenumber\\RBE-550 Path Planning, Spring 2021}}
 
 
 
 \author[]{\textbf{Daniel~Montrallo~Flickinger, PhD}}
 \institute[]%
-{\includegraphics[width=0.4\textwidth]{/usr/local/share/LaTeX_templates/RBE550_lecture/fig/WPI_Inst_Prim_FulClr.png}
+{\includegraphics[width=0.3\textwidth]{/usr/local/share/LaTeX_templates/RBE550_lecture/fig/WPI_Inst_Prim_FulClr.png}
 }
 \date{\lecturedate}
 
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
 
-% 
-% \pgfdeclareimage[width=\paperwidth]{mybackground}{fig/background_blue.jpg}
-% 
-% \setbeamertemplate{title page}{
-%     
-%     \begin{picture}(0,0)
-%         \put(-30,-163){%
-%             \pgfuseimage{mybackground}
-%         }
-%         
-%         \put(0,-110.7){%
-%             \begin{minipage}[b][45mm][t]{226mm}
-%                 \usebeamerfont{title}{\inserttitle\par}
-%             \end{minipage}
-%         }
-% 
-%     \end{picture}
-% }
-
-% 
-% \usebackgroundtemplate%
-% {%
-% \includegraphics[height=\paperheight]{}%
-% }
-
-% \logo{\includegraphics[height=0.5cm]{}}
-
-
-% Delete this, if you do not want the table of contents to pop up at
+% Make the table of contents to pop up at
 % the beginning of each subsection:
 \AtBeginSection[]
 {
@@ -134,6 +115,10 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
         \setbeamercolor{background canvas}{bg=WPIcrimson}
         \setbeamercolor{normal text}{fg=WPIgray}
         \setbeamercolor{structure}{fg=white}
+
+        \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+        \setbeamercolor{section in toc}{fg=yellow}
+
         
 
         \begin{frame}<beamer>
@@ -143,7 +128,7 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
                 \begin{column}{0.45\textwidth}
                 
 
-            \tableofcontents[currentsection,hideallsubsections]
+            \tableofcontents[currentsection,hideothersubsections]
 %         \tableofcontents[currentsection,currentsubsection,hideallsubsections]
             
         \end{column}
