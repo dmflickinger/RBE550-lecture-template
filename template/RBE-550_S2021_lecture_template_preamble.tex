@@ -9,12 +9,14 @@
 
 \usepackage[utf8]{inputenc}
 
-
-\usepackage[default]{comfortaa}
-\usepackage[lf]{electrum}
-\usepackage{inconsolata}
-
+\usepackage{palatino}
 \usepackage[T1]{fontenc}
+
+
+\usepackage{fontspec}
+\setsansfont{Eurostile}
+
+
 
 \usepackage{lipsum}
 
@@ -48,11 +50,6 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
 
-% garamond, futura/optima
-% try fourier, \danger
-% \usepackage{palatino} 
-
-
 % \usepackage{helvet}
 \usepackage{sourcecodepro}
 \usepackage{fourier}
@@ -61,10 +58,9 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
 
-% FIXME: get electrum font working!
-\setbeamerfont{title}{family=\fontfamily{comfortaa}\selectfont, shape=\normalfont}
-\setbeamerfont{frametitle}{family=\fontfamily{yes}\selectfont}
-\setbeamerfont{framesubtitle}{family=\fontfamily{yes}\selectfont}
+\setbeamerfont{title}{family=\sffamily\selectfont, shape=\normalfont}
+\setbeamerfont{frametitle}{family=\sffamily\selectfont}
+\setbeamerfont{framesubtitle}{family=\sffamily\selectfont}
 \setbeamerfont{normal text}{family=\fontfamily{sansserif}\selectfont}
 % \renewcommand{\sfdefault}{inconsolata}
 
@@ -89,12 +85,11 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \usetikzlibrary{shapes,arrows}
 
 
-% FIXME: change lecture title here
 \title[\scalebox{2}{\insertlogo}]{\lecturetitle\\\small{Lecture \lecturenumber\\RBE-550 Path Planning, Spring 2021}}
 
 
 
-\author[]{\textbf{Daniel~Montrallo~Flickinger, PhD}}
+\author[]{\sffamily\textbf{Daniel~Montrallo~Flickinger, PhD}}
 \institute[]%
 {\includegraphics[width=0.3\textwidth]{/usr/local/share/LaTeX_templates/RBE550_lecture/fig/WPI_Inst_Prim_FulClr.png}
 }
