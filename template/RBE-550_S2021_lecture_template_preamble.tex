@@ -91,7 +91,8 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \usetikzlibrary{shapes,arrows}
 
 
-\title[\scalebox{2}{\insertlogo}]{\lecturetitle\\\small{Lecture \lecturenumber\\RBE-550 Path Planning, Spring 2021}}
+\title[\scalebox{2}{\insertlogo}]{\lecturetitle\\\small{Lecture \lecturenumber%
+\\ \input{/usr/local/share/LaTeX_templates/RBE550_lecture/course_title.tex}}}
 
 
 
@@ -99,7 +100,7 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \institute[]%
 {\includegraphics[width=0.3\textwidth]{/usr/local/share/LaTeX_templates/RBE550_lecture/fig/WPI_Inst_Prim_FulClr.png}
 }
-\date{\lecturedate}
+\date{\textcolor{lightgray}{\tiny{Created: \lecturedate}}}
 
 \addtobeamertemplate{navigation symbols}{}{%
     \usebeamerfont{footline}%
