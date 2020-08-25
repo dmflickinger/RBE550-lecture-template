@@ -91,6 +91,10 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \usetikzlibrary{shapes,arrows}
 
 
+\newcommand{\citeFigure}[2]{\includegraphics[width=\columnwidth]{fig/#1}\\%
+\tiny\textcolor{lightgray}{Source: \cite{#2}}}
+
+
 \title[\scalebox{2}{\insertlogo}]{\lecturetitle\\\small{Lecture \lecturenumber%
 \\ \input{/usr/local/share/LaTeX_templates/RBE550_lecture/course_title.tex}}}
 
