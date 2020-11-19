@@ -1,4 +1,5 @@
 #!/bin/bash
+# Installs the template files on a local file system (for use outside a container).
 
 mkdir -p /usr/local/share/LaTeX_templates/RBE550_lecture/fig
 
