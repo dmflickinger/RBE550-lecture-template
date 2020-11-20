@@ -80,9 +80,10 @@ COPY fig/*.png /usr/local/share/LaTeX_templates/RBE550_lecture/fig/
 COPY template/RBE-550_S2021_lecture_template_preamble.tex /usr/local/share/LaTeX_templates/RBE550_lecture/
 COPY template/RBE-550_S2021_lecture_template_final_slide.tex /usr/local/share/LaTeX_templates/RBE550_lecture/
 COPY template/course_title.tex /usr/local/share/LaTeX_templates/RBE550_lecture/
+COPY scripts/build.sh /usr/local/bin/
 
 
-ENTRYPOINT [ "/source/scripts/build.sh" ]
+ENTRYPOINT [ "/usr/local/bin/build.sh" ]
 
 
 VOLUME [ "/source" "/output" "/bib"]
