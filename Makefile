@@ -2,18 +2,18 @@
 # Date: 2020
 # Author: Daniel Montrallo Flickinger, PhD ; dflickinger@wpi.edu
 
-lecture_name = RBE-550_S2021_lecture_template
+lecture_name = RBE-550_lecture_template
 
 
 all : document
 document: $(lecture_name).tex
 #	$(MAKE) -C diagrams
-	xelatex -shell-escape $(lecture_name)
-	xelatex -shell-escape $(lecture_name)
+	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
+	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
 	bibtex $(lecture_name)
 	bibtex $(lecture_name)
-	xelatex -shell-escape $(lecture_name)
-	xelatex -shell-escape $(lecture_name)
+	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
+	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
 
 
 install: document
