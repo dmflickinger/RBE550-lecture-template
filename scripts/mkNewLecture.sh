@@ -5,5 +5,5 @@
 mkdir -p $1
 
 cp -f Makefile $1
-cp -f RBE-550_S2021_lecture_template.tex $1
+cp -f RBE-550_lecture_template.tex $1
 cp -rf slides $1
