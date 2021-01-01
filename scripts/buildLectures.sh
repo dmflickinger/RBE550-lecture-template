@@ -4,6 +4,6 @@
 
 
 for lecture in $1/*; do
-    podman run -it --rm -v $lecture:/source -v $2/lectureSlides:/output -v $2/RBE550_resources:/bib rbe_lecture
+    podman run -it --rm -v $lecture:/source -v $2/lectureSlides:/output -v $2/rbe550_resources:/bib rbe_lecture
 done
 
