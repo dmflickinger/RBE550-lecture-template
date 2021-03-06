@@ -77,10 +77,89 @@ int main(int argc, char** argv)
         \end{column}
         \begin{column}{0.3\textwidth}
 
+            % FIXME: test cite figure better (maybe add photo)
             \citeFigure{WPI_Inst_Prim_FulClr.png}{LaValle}
 
         \end{column}
     \end{columns}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Algorithm}
+
+
+% TODO: put in a more generic algorithm
+
+{\tiny
+
+\begin{algorithm}[H]
+
+\SetKwData{open}{OPEN}
+\SetKwData{qstart}{$q_{start}$}
+\SetKwData{qnew}{$q_{new}$}
+
+\SetKwData{current}{current}
+\SetKwData{goal}{goal}
+
+\SetKwData{success}{SUCCESS}
+\SetKwData{failure}{FAILURE}
+
+\SetKwData{counter}{counter}
+\SetKwData{maxcount}{MAXCOUNT}
+
+\SetKwData{cost}{cost}
+\SetKwData{pastCost}{${cost}_{past}$}
+
+
+\SetKwData{parent}{parent}
+
+% \SetKwFunction{First}{First}
+% \SetKwFunction{Remove}{Remove}
+% \SetKwFunction{Add}{Add}
+
+\open $\leftarrow$ \{\qstart\}
+
+\pastCost[\qstart] $\leftarrow$ 0
+
+\counter $\leftarrow$ 1
+
+\While{\open is not empty and \counter $<$ \maxcount}{
+    
+    \current $\leftarrow$ first node in \open, remove from \open
+
+    \If{\current is in the goal set}{
+
+        \KwRet{\success and the path to \current}
+    
+    } 
+    \If{\current is not in a previously occupied C-space grid cell}{
+
+        mark grid cell occupied
+
+        \counter $+=$ 1
+
+        \lForEach{control in the discrete control set}{
+
+            integrate control forward a short time $\Delta t$ from \current to \qnew
+
+            \If{the path to \qnew is collision-free}{
+                compute \cost of the path to \qnew
+
+                place \qnew in \open, sorted by \cost
+
+                \parent[\qnew] $\leftarrow$ \current
+            }
+        }
+
+    }
+}
+
+\KwRet{\failure}
+
 
 
 \end{frame}
