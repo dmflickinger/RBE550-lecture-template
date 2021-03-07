@@ -92,73 +92,82 @@ int main(int argc, char** argv)
 \frametitle{Algorithm}
 
 
-% TODO: put in a more generic algorithm
-
-%{\tiny
-
-%\begin{algorithm}[H]
-
-%\SetKwData{open}{OPEN}
-%\SetKwData{qstart}{$q_{start}$}
-%\SetKwData{qnew}{$q_{new}$}
-
-%\SetKwData{current}{current}
-%\SetKwData{goal}{goal}
-
-%\SetKwData{success}{SUCCESS}
-%\SetKwData{failure}{FAILURE}
-
-%\SetKwData{counter}{counter}
-%\SetKwData{maxcount}{MAXCOUNT}
-
-%\SetKwData{cost}{cost}
-%\SetKwData{pastCost}{${cost}_{past}$}
 
 
-%\SetKwData{parent}{parent}
+\begin{algorithm}[H]
 
-%% \SetKwFunction{First}{First}
-%% \SetKwFunction{Remove}{Remove}
-%% \SetKwFunction{Add}{Add}
+\SetKwData{tree}{$\mathcal{T}$}
 
-%\open $\leftarrow$ \{\qstart\}
+\SetKwData{Xstart}{$X_{start}$}
+\SetKwData{Xsample}{$X_{sample}$}
+\SetKwData{Xnearest}{$X_{nearest}$}
+\SetKwData{Xnew}{$X_{new}$}
+\SetKwData{Xgoal}{$X_{goal}$}
+\SetKwData{Xrand}{$X_{rand}$}
+\SetKwData{Xinit}{$X_{init}$}
 
-%\pastCost[\qstart] $\leftarrow$ 0
+\SetKwData{Sgoal}{$s_{goal}$}
 
-%\counter $\leftarrow$ 1
+\SetKwData{k}{$k$}
+\SetKwData{kk}{$K$}
 
-%\While{\open is not empty and \counter $<$ \maxcount}{
-    
-%    \current $\leftarrow$ first node in \open, remove from \open
 
-%    \If{\current is in the goal set}{
+\SetKwData{statespace}{$X$}
 
- %       \KwRet{\success and the path to \current}
-    
-%    } 
-%    \If{\current is not in a previously occupied C-space grid cell}{
+\SetKwData{toss}{toss}
+\SetKwData{heads}{heads}
 
-%        mark grid cell occupied
+\SetKwData{init}{init}
 
-%        \counter $+=$ 1
+\SetKwData{extend}{EXTEND}
+\SetKwData{randomstate}{RANDOM\_STATE()}
+\SetKwData{cointoss}{COIN\_TOSS()}
 
-%        \lForEach{control in the discrete control set}{
+\SetKwFunction{buildRRT}{BUILD\_RRT}
+\SetKwFunction{biasedRandomState}{BIASED\_RANDOM\_STATE}
+\SetKwProg{RRTalg}{}{}{}
 
-%            integrate control forward a short time $\Delta t$ from \current to \qnew
+\RRTalg{\buildRRT{\Xinit}}{
 
-%            \If{the path to \qnew is collision-free}{
-%                compute \cost of the path to \qnew
 
-%                place \qnew in \open, sorted by \cost
 
- %               \parent[\qnew] $\leftarrow$ \current
- %           }
- %       }
 
-  %  }
-%}
+\tree.\init (\Xinit)
 
-%\KwRet{\failure}
+\For{\k $ = 1$ \KwTo \kk}{
+
+    \Xrand $\leftarrow$ \alert{\biasedRandomState{}}
+
+    \extend (\tree, \Xrand)
+
+}
+
+\KwRet{\tree}
+
+}
+
+
+\SetKwProg{biasedRRTfunc}{}{}{}
+
+\biasedRRTfunc{\biasedRandomState{}}{
+
+\toss $\leftarrow$ \cointoss
+
+\If{\toss $=$ \heads}{
+    \KwRet{\Sgoal}
+}
+\Else{
+    \KwRet{\randomstate}
+
+}
+
+}
+
+
+\caption{Goal-biased RRT algorithm}
+\label{alg:goalBiasedRRT}
+\end{algorithm}
+
 
 
 
