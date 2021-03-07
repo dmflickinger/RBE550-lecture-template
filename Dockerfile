@@ -86,4 +86,5 @@ COPY scripts/build.sh /usr/local/bin/
 ENTRYPOINT [ "/usr/local/bin/build.sh" ]
 
 
-VOLUME [ "/source" "/output" "/bib"]
+#VOLUME [ "/source" "/output" "/bib"]
+
