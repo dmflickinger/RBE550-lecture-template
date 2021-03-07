@@ -94,69 +94,69 @@ int main(int argc, char** argv)
 
 % TODO: put in a more generic algorithm
 
-{\tiny
+%{\tiny
 
-\begin{algorithm}[H]
+%\begin{algorithm}[H]
 
-\SetKwData{open}{OPEN}
-\SetKwData{qstart}{$q_{start}$}
-\SetKwData{qnew}{$q_{new}$}
+%\SetKwData{open}{OPEN}
+%\SetKwData{qstart}{$q_{start}$}
+%\SetKwData{qnew}{$q_{new}$}
 
-\SetKwData{current}{current}
-\SetKwData{goal}{goal}
+%\SetKwData{current}{current}
+%\SetKwData{goal}{goal}
 
-\SetKwData{success}{SUCCESS}
-\SetKwData{failure}{FAILURE}
+%\SetKwData{success}{SUCCESS}
+%\SetKwData{failure}{FAILURE}
 
-\SetKwData{counter}{counter}
-\SetKwData{maxcount}{MAXCOUNT}
+%\SetKwData{counter}{counter}
+%\SetKwData{maxcount}{MAXCOUNT}
 
-\SetKwData{cost}{cost}
-\SetKwData{pastCost}{${cost}_{past}$}
+%\SetKwData{cost}{cost}
+%\SetKwData{pastCost}{${cost}_{past}$}
 
 
-\SetKwData{parent}{parent}
+%\SetKwData{parent}{parent}
 
-% \SetKwFunction{First}{First}
-% \SetKwFunction{Remove}{Remove}
-% \SetKwFunction{Add}{Add}
+%% \SetKwFunction{First}{First}
+%% \SetKwFunction{Remove}{Remove}
+%% \SetKwFunction{Add}{Add}
 
-\open $\leftarrow$ \{\qstart\}
+%\open $\leftarrow$ \{\qstart\}
 
-\pastCost[\qstart] $\leftarrow$ 0
+%\pastCost[\qstart] $\leftarrow$ 0
 
-\counter $\leftarrow$ 1
+%\counter $\leftarrow$ 1
 
-\While{\open is not empty and \counter $<$ \maxcount}{
+%\While{\open is not empty and \counter $<$ \maxcount}{
     
-    \current $\leftarrow$ first node in \open, remove from \open
+%    \current $\leftarrow$ first node in \open, remove from \open
 
-    \If{\current is in the goal set}{
+%    \If{\current is in the goal set}{
 
-        \KwRet{\success and the path to \current}
+ %       \KwRet{\success and the path to \current}
     
-    } 
-    \If{\current is not in a previously occupied C-space grid cell}{
+%    } 
+%    \If{\current is not in a previously occupied C-space grid cell}{
 
-        mark grid cell occupied
+%        mark grid cell occupied
 
-        \counter $+=$ 1
+%        \counter $+=$ 1
 
-        \lForEach{control in the discrete control set}{
+%        \lForEach{control in the discrete control set}{
 
-            integrate control forward a short time $\Delta t$ from \current to \qnew
+%            integrate control forward a short time $\Delta t$ from \current to \qnew
 
-            \If{the path to \qnew is collision-free}{
-                compute \cost of the path to \qnew
+%            \If{the path to \qnew is collision-free}{
+%                compute \cost of the path to \qnew
 
-                place \qnew in \open, sorted by \cost
+%                place \qnew in \open, sorted by \cost
 
-                \parent[\qnew] $\leftarrow$ \current
-            }
-        }
+ %               \parent[\qnew] $\leftarrow$ \current
+ %           }
+ %       }
 
-    }
-}
+  %  }
+%}
 
 \KwRet{\failure}
 
