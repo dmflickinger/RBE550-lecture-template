@@ -12,8 +12,8 @@ Obtain the [RBE resources](https://github.com/dmflickinger/RBE550resources) proj
 
 ```sh
 mkdir lectureSlides
-docker build -t rbe_lecture .
-docker run -it --rm -v .:/source -v lectureSlides:/output -v ../rbe_resources:/bib rbe_lecture
+podman build -t rbe_lecture .
+podman run -it --rm -v .:/source -v lectureSlides:/output -v ../rbe_resources:/bib rbe_lecture
 ```
 
 A completed lecture (in PDF) format is created in the lectureSlides directory.
