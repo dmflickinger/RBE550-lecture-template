@@ -73,18 +73,24 @@ RUN dnf install -y texlive-adjustbox \
 
 RUN mkdir -p /source \
     && mkdir -p /output \
-    && mkdir -p /bib \
-    && mkdir -p /usr/local/share/LaTeX_templates/RBE550_lecture/fig
+    && mkdir -p /bib
 
-COPY fig/*.png /usr/local/share/LaTeX_templates/RBE550_lecture/fig/
-COPY template/RBE-550_S2021_lecture_template_preamble.tex /usr/local/share/LaTeX_templates/RBE550_lecture/
-COPY template/RBE-550_S2021_lecture_template_final_slide.tex /usr/local/share/LaTeX_templates/RBE550_lecture/
-COPY template/course_title.tex /usr/local/share/LaTeX_templates/RBE550_lecture/
+COPY fig/*.pdf /usr/local/share/LaTeX_templates/RBE550_lecture/fig/
+
+COPY template/RBElecture.cls /usr/share/texlive/texmf-local/tex/latex/RBElecture/
+COPY template/fig/*.png /usr/share/texlive/texmf-local/tex/latex/RBElecture/fig/
+
 COPY scripts/build.sh /usr/local/bin/
+
+
+# Register the RBE lecture class with texlive
+RUN tlmgr conf texmf TEXMFHOME /usr/share/texlive/texmf-local \
+    && mktexlsr /usr/share/texlive/texmf-local
+
 
 
 ENTRYPOINT [ "/usr/local/bin/build.sh" ]
 
-
+# FIXME: volumes should be defined
 #VOLUME [ "/source" "/output" "/bib"]
 
