@@ -79,6 +79,9 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 % does not look nice, try deleting the line with the fontenc.
 
 
+\RequirePackage{caption}
+\captionsetup[figure]{labelformat=empty}
+
 
 % \RequirePackage{ graphics,array,ifthen }
 \RequirePackage{ graphicx,array,ifthen }
