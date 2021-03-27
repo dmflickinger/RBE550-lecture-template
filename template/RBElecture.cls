@@ -36,7 +36,7 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 
 \RequirePackage[utf8]{inputenc}
 
-\RequirePackage{palatino}
+% \RequirePackage{palatino}
 \RequirePackage[T1]{fontenc}
 
 \RequirePackage{fontawesome}
@@ -71,7 +71,8 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 
 
 % \RequirePackage{helvet}
-\RequirePackage{sourcecodepro}
+% \RequirePackage{sourcecodepro}
+% \RequirePackage{sourceserifpro}
 \RequirePackage{fourier}
 % \RequirePackage{ccfonts}
 
@@ -129,6 +130,8 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 \setbeamertemplate{navigation symbols}{}
 
 
+\setbeamertemplate{caption}{\tiny\insertcaption}
+\setbeamertemplate{caption label separator}{}
 
 \mode<presentation>
 {
@@ -145,11 +148,15 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
-\setbeamerfont{title}{family=\sffamily\selectfont, shape=\normalfont}
+\setbeamerfont{title}{family=\sffamily\selectfont, shape=\normalfont, series=\bfseries}
 \setbeamerfont{frametitle}{family=\sffamily\selectfont}
 \setbeamerfont{framesubtitle}{family=\sffamily\selectfont}
+
 \setbeamerfont{normal text}{family=\fontfamily{sansserif}\selectfont}
-% \renewcommand{\sfdefault}{inconsolata}
+
+\setbeamerfont{section in toc}{family=\sffamily\selectfont}
+\setbeamerfont{section in sidebar}{family=\sffamily\selectfont}
+
 
 
 
