@@ -283,8 +283,7 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \begin{frame}[allowframebreaks]
     \frametitle{Sources}
 
-    \bibliographystyle{alpha}
-    % \bibliographystyle{IEEEtran}
+    \bibliographystyle{IEEEtran}
     \bibliography{/bib/RBE_resources.bib}
 
 \end{frame}
