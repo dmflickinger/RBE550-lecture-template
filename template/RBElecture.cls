@@ -280,7 +280,7 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \end{frame}
 
 \setbeamercolor{background canvas}{bg=white}
-\begin{frame}[allowframebreaks,label=bibliography]
+\begin{frame}[allowframebreaks]
     \frametitle{Sources}
 
     \bibliographystyle{alpha}
