@@ -27,6 +27,7 @@ RUN dnf install -y texlive-adjustbox \
                    texlive-collection-fontsrecommended \
                    texlive-fourier \
                    texlive-ifmtarg \
+		   texlive-IEEEtran \
                    texlive-inconsolata \
                    texlive-kpfonts \
                    texlive-lastpage \
