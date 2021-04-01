@@ -173,7 +173,6 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
 
-% FIXME: fonts note set correctly at each table of contents page
 % Make the table of contents to pop up at
 % the beginning of each subsection:
 \AtBeginSection[]
@@ -183,20 +182,18 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
         \setbeamercolor{normal text}{fg=WPIgray}
         \setbeamercolor{structure}{fg=white}
 
-        \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+        % \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
         \setbeamercolor{section in toc}{fg=yellow}
 
         
 
         \begin{frame}<beamer>
-%     \frametitle{Outline}
             
             \begin{columns}
                 \begin{column}{0.45\textwidth}
                 
 
-            \tableofcontents[currentsection,hideothersubsections]
-%         \tableofcontents[currentsection,currentsubsection,hideallsubsections]
+            \tableofcontents[currentsection,hideothersubsections,sectionstyle=show/shaded]
             
         \end{column}
         \begin{column}{0.55\textwidth}
