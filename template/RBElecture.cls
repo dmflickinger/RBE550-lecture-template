@@ -85,10 +85,10 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 
 
 % \RequirePackage{ graphics,array,ifthen }
-\RequirePackage{ graphicx,array,ifthen }
+\RequirePackage{graphicx,array,ifthen}
 
-\RequirePackage{ fancybox }
-% \RequirePackage{ picins }
+\RequirePackage{fancybox}
+% \RequirePackage{picins}
 
 
 \RequirePackage{hyperref}
@@ -128,7 +128,6 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 
 % Get rid of ugly navigation buttons
 \setbeamertemplate{navigation symbols}{}
-
 
 \setbeamertemplate{caption}{\tiny\insertcaption}
 \setbeamertemplate{caption label separator}{}
@@ -281,7 +280,7 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
     \frametitle{Sources}
 
     \bibliographystyle{IEEEtran}
-    \bibliography{/bib/RBE_resources.bib}
+    \bibliography{/bib/RBE_resources.bib,/bib/CV_flickinger_daniel.bib}
 
 \end{frame}
 
