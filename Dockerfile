@@ -27,7 +27,7 @@ RUN dnf install -y texlive-adjustbox \
                    texlive-collection-fontsrecommended \
                    texlive-fourier \
                    texlive-ifmtarg \
-		   texlive-IEEEtran \
+		           texlive-IEEEtran \
                    texlive-inconsolata \
                    texlive-kpfonts \
                    texlive-lastpage \
@@ -51,6 +51,7 @@ RUN dnf install -y texlive-adjustbox \
                    texlive-sourcecodepro \
                    texlive-subfigmat \
                    texlive-svg \
+                   texlive-tcolorbox \
                    texlive-titlesec \
                    texlive-titling \
                    texlive-tocloft \
@@ -63,6 +64,7 @@ RUN dnf install -y texlive-adjustbox \
                    texlive-nextpage \
                    texlive-fancybox \
                    texlive-algorithm2e \
+                   texlive-progressbar \
                    graphviz \
                    make \
                    ossobuffo-jura-fonts \

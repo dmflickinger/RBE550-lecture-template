@@ -53,7 +53,7 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 \RequirePackage{xcolor}
 
 \RequirePackage{tabularx}
-
+\RequirePackage{tcolorbox}
 
 
 \RequirePackage{babel}
