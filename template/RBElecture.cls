@@ -134,7 +134,7 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 
 \mode<presentation>
 {
-  \usetheme{Rochester}
+  \usetheme[height=14mm]{Rochester}
   \usecolortheme[RGB={171,25,45}]{structure}
   \setbeamercolor{alerted text}{fg=WPIcrimson}
   \setbeamercovered{transparent}
@@ -241,18 +241,36 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
 
+
 \author[]{\sffamily\textbf{\myRBEtitleframeAuthor}}
 
-\institute[]
+\institute[WPI]
 {\includegraphics[width=0.3\textwidth]{fig/WPI_Inst_Prim_FulClr.png}
 }
 
+
 \date{\textcolor{lightgray}{\tiny{Created: \today}}}
+
+
+% Temporarily adjust header height to 2mm, only for title page
+\begingroup
+\makeatletter
+\beamer@headheight=2mm
+\expandafter\let\csname beamer@@tmpop@headline@sidebar theme\endcsname\relax
+\defbeamertemplate*{headline}{sidebar theme}
+{%
+  \begin{beamercolorbox}[wd=\paperwidth]{frametitle}
+    \vrule width0pt height \beamer@headheight%  
+  \end{beamercolorbox}
+  \vspace*{\beamer@headheight}
+}
+\makeatother
 
 
 \begin{frame}[label=ROOT]
   \titlepage
 \end{frame}
+\endgroup
 
 }
 
