@@ -233,11 +233,12 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
 
+
 \newcommand{\RBEtitleframe}[1][]{%
 
 \pgfkeys{/myRBEtitleframe, default, #1}
 
-\title[\scalebox{2}{\insertlogo}]{\myRBEtitleframeTitle\\\small{Lecture \myRBEtitleframeLectureNumber \\ \myRBEtitleframeCourseTitle}}
+\title[\scalebox{2}{\insertlogo}]{\myRBEtitleframeTitle\\\small{ \myRBEtitleframeCourseTitle : Lecture \myRBEtitleframeLectureNumber}}
 
 
 
@@ -245,12 +246,10 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \author[]{\sffamily\textbf{\myRBEtitleframeAuthor}}
 
 \institute[WPI]
-{\includegraphics[width=0.3\textwidth]{fig/WPI_Inst_Prim_FulClr.png}
+{\includegraphics[width=0.25\textwidth]{fig/WPI_Inst_Prim_FulClr.png}
 }
 
-
 \date{\textcolor{lightgray}{\tiny{Created: \today}}}
-
 
 % Temporarily adjust header height to 2mm, only for title page
 \begingroup
