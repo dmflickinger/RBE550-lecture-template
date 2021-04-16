@@ -134,7 +134,7 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 
 \mode<presentation>
 {
-  \usetheme{Marburg}
+  \usetheme{Rochester}
   \usecolortheme[RGB={171,25,45}]{structure}
   \setbeamercolor{alerted text}{fg=WPIcrimson}
   \setbeamercovered{transparent}
