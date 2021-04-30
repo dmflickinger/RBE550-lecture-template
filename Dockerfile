@@ -1,4 +1,5 @@
-FROM fedora
+FROM fedora:33
+# TODO: xetex is broken in fedora 34
 
 WORKDIR /source
 
@@ -43,6 +44,7 @@ RUN dnf install -y texlive-adjustbox \
                    texlive-pdfcrop \
                    texlive-pgfgantt \
                    texlive-pgfopts \
+                   texlive-pgf-blur \
                    texlive-pygmentex \
                    texlive-roboto \
                    texlive-sectsty \
