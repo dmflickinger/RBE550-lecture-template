@@ -6,6 +6,12 @@ WORKDIR /source
 # Install packages (mainly texlive)
 # =================================
 
+
+RUN dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+		   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
+    && dnf clean all
+
+
 RUN dnf install -y texlive-adjustbox \
                    texlive-background \
                    texlive-bibtex \
@@ -70,10 +76,15 @@ RUN dnf install -y texlive-adjustbox \
                    graphviz \
                    make \
                    ossobuffo-jura-fonts \
+		           poppler-utils \
                    python3-pygments \
                    python3-pygments-style-solarized \
                    which \
+		           ffmpeg \
     && dnf clean all
+
+
+
 
 
 RUN mkdir -p /source \
@@ -86,6 +97,7 @@ COPY template/RBElecture.cls /usr/share/texlive/texmf-local/tex/latex/RBElecture
 COPY template/fig/*.png /usr/share/texlive/texmf-local/tex/latex/RBElecture/fig/
 
 COPY scripts/build.sh /usr/local/bin/
+COPY scripts/encodeVideo.sh /usr/local/bin/
 
 
 # Register the RBE lecture class with texlive

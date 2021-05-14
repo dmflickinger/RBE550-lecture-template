@@ -2,9 +2,13 @@
 *.log
 *.nav
 *.out
+*.bbl
+*.blg
 *.pdf
+*.png
 *.snm
 *.toc
 *.vrb
 *.gz
+*.m4v
 !fig/placeholder.pdf

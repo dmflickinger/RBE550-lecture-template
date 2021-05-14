@@ -5,7 +5,7 @@
 lecture_name = RBE-550_lecture_template
 
 
-all : document
+all : document video
 document: $(lecture_name).tex
 #	$(MAKE) -C diagrams
 	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
@@ -15,12 +15,18 @@ document: $(lecture_name).tex
 	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
 	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
 
+video: $(lecture_name).pdf
+	encodeVideo.sh $(lecture_name)
 
-install: document
+install: document video
 	cp -f $(lecture_name).pdf /output/
+	cp -f $(lecture_name).m4v /output/
+	cp -f $(lecture_name)_slides.tar.gz /output/
 
 clean :
 	rm -f $(lecture_name).pdf
+	rm -f $(lecture_name).m4v
+	rm -f $(lecture_name)_slides.tar.gz
 	rm -f *.out
 	rm -f *.log
 	rm -f *.aux
