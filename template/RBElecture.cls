@@ -114,8 +114,9 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 % -------------
 
 
-\definecolor{WPIgray}{RGB}{109,109,109}
-\definecolor{WPIcrimson}{RGB}{171,25,45}
+\definecolor{WPIgray}{RGB}{169,176,183}
+\definecolor{WPIcrimson}{RGB}{172,43,55}
+
 \definecolor{WPIgrayCrimson}{RGB}{103,15,27}
 \definecolor{SikBlue}{RGB}{34,53,102}
 \definecolor{brightOranage}{RGB}{202,67,0}
@@ -177,35 +178,37 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \AtBeginSection[]
 {
     {
-        \setbeamercolor{background canvas}{bg=WPIcrimson}
-        \setbeamercolor{normal text}{fg=WPIgray}
-        \setbeamercolor{structure}{fg=white}
+      \setbeamercolor{background canvas}{bg=WPIcrimson}
+      \setbeamercolor{normal text}{fg=WPIgray}
+      \setbeamercolor{structure}{fg=white}
 
-        % \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
-        \setbeamercolor{section in toc}{fg=yellow}
+      % \setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+      \setbeamercolor{section in toc}{fg=yellow}
 
         
+      % \usebackgroundtemplate{\includegraphics[height=\textheight]{fig/WPI_background_logo.png}}
 
-        \begin{frame}<beamer>
+
+      \begin{frame}<beamer>
             
             \begin{columns}
-                \begin{column}{0.45\textwidth}
+                \begin{column}{0.65\textwidth}
                 
 
             \tableofcontents[currentsection,hideothersubsections,sectionstyle=show/shaded]
             
         \end{column}
-        \begin{column}{0.55\textwidth}
-            
-\noindent
-\hfill
-\includegraphics[width=\columnwidth]{fig/WPI_background_logo_corner.png}
+        \begin{column}{0.35\textwidth}
+
+          \noindent
+          \hfill
+          \includegraphics[width=\columnwidth]{fig/WPI_background_logo.png}
             
         \end{column}
         \end{columns}
 
-        \end{frame}
-    }
+     \end{frame}
+  }
 }
 
 
@@ -249,7 +252,7 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 {\includegraphics[width=0.25\textwidth]{fig/WPI_Inst_Prim_FulClr.png}
 }
 
-\date{\textcolor{lightgray}{\tiny{Created: \today}}}
+\date{\tiny{Last updated: \today}}
 
 % Temporarily adjust header height to 2mm, only for title page
 \begingroup
@@ -266,13 +269,14 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 \makeatother
 
 
+\setbeamercolor{background canvas}{bg=WPIgray}
 \begin{frame}[label=ROOT]
   \titlepage
 \end{frame}
 \endgroup
 
-}
 
+}
 
 
 
