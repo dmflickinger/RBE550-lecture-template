@@ -234,15 +234,25 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 % -----------
 
 
-
+\newcommand\dateupdatedfootnote[1]{%
+\begingroup
+\renewcommand\thefootnote{}\footnote{#1}%
+\addtocounter{footnote}{-1}%
+\endgroup
+}
 
 
 \newcommand{\RBEtitleframe}[1][]{%
 
 \pgfkeys{/myRBEtitleframe, default, #1}
 
-\title[\scalebox{2}{\insertlogo}]{\myRBEtitleframeTitle\\\small{ \myRBEtitleframeCourseTitle : Lecture \myRBEtitleframeLectureNumber}}
-
+\title[\scalebox{2}{\insertlogo}]{%
+\begin{tabularx}{\columnwidth}{r|X}
+    \Huge \myRBEtitleframeLectureNumber & \myRBEtitleframeTitle \\
+                                        & \small{\myRBEtitleframeCourseTitle} \\
+                                        & \tiny{Last updated: \today}
+\end{tabularx}
+}
 
 
 
@@ -252,7 +262,7 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 {\includegraphics[width=0.25\textwidth]{fig/WPI_Inst_Prim_FulClr.png}
 }
 
-\date{\tiny{Last updated: \today}}
+% \date{\tiny{Last updated: \today}}
 
 % Temporarily adjust header height to 2mm, only for title page
 \begingroup
