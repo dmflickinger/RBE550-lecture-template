@@ -1,4 +1,5 @@
 #!/bin/bash
 
-make install
-make clean
+time make install clean
+
+
