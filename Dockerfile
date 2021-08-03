@@ -1,4 +1,4 @@
-FROM fedora:33
+FROM fedora:34
 # TODO: xetex is broken in fedora 34
 
 WORKDIR /source

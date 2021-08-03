@@ -20,7 +20,7 @@ video: $(lecture_name).pdf
 
 install: document video
 	cp -f $(lecture_name).pdf /output/
-	cp -f $(lecture_name).m4v /output/
+#	cp -f $(lecture_name).m4v /output/
 	cp -f $(lecture_name)_slides.tar.gz /output/
 
 clean :
