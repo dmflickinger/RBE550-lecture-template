@@ -10,6 +10,7 @@ document: $(lecture_name).tex
 #	$(MAKE) -C diagrams
 	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
 	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
+	makeindex $(lecture_name)-url
 	bibtex $(lecture_name)
 	bibtex $(lecture_name)
 	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
@@ -20,7 +21,7 @@ video: $(lecture_name).pdf
 
 install: document video
 	cp -f $(lecture_name).pdf /output/
-	cp -f $(lecture_name).m4v /output/
+	# cp -f $(lecture_name).m4v /output/
 	cp -f $(lecture_name)_slides.tar.gz /output/
 
 clean :
@@ -37,3 +38,7 @@ clean :
 	rm -f *.vrb
 	rm -f *.nav
 	rm -f *.snm
+	rm -f *.idx
+	rm -f *.ilg
+	rm -f *.ind
+	rm -f *.mst

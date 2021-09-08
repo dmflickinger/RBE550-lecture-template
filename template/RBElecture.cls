@@ -288,6 +288,92 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 }
 
+% Create an index file for all URLs in the document
+% -------------------------------------------------
+
+
+% \RequirePackage{filecontents}
+\begin{filecontents*}{\jobname-url.mst}
+  % Input style specifiers
+  keyword "\\urlentry"
+  % Output style specifiers
+  preamble "\\begin{theurls}"
+  postamble "\n\\end{theurls}\n"
+  group_skip ""
+  headings_flag 0  
+  item_0 "\n\\urlitem{"
+  delim_0 "}{"
+  delim_t "}"
+  line_max 500
+  \end{filecontents*}
+  
+
+
+% Build a list of URLs in the document
+% ------------------------------------
+
+% REF: https://tex.stackexchange.com/questions/121977/auto-generate-list-of-url-usages-within-document
+
+\makeatletter
+\newwrite\file@url
+\openout\file@url=\jobname-url.idx\relax
+
+\newcommand*{\write@url}[1]{%
+  \begingroup
+    \EdefEscapeHex\@tmp{#1}%
+    \protected@write\file@url{}{%
+      \protect\urlentry{\@tmp}{\thepage}%
+    }%
+  \endgroup
+}
+\let\saved@hyper@linkurl\hyper@linkurl
+\renewcommand*{\hyper@linkurl}[2]{%
+  \write@url{#2}%
+  \saved@hyper@linkurl{#1}{#2}%
+}
+\newcommand*{\listurlname}{List of URLs}
+\newcommand*{\printurls}{%
+  \InputIfFileExists{\jobname-url.ind}{}{}%
+}
+\newenvironment{theurls}{%
+  \section*{\listurlname}%
+  \@mkboth{\listurlname}{\listurlname}%
+  \let\write@url\@gobble  
+  \ttfamily
+  \raggedright
+  \setlength{\parfillskip}{0pt}%
+}{%
+  \par
+}
+\newcommand*{\urlitem}[2]{%
+  \hangindent=1em
+  \hangafter=1   
+  \begingroup    
+    \EdefUnescapeHex\@tmp{#1}%
+    \expandafter\url\expandafter{\@tmp}%
+  \endgroup
+  \urlindex@pfill
+  \IfSubStr{#2}{,}{pp}{%
+    \IfSubStr{#2}{-}{pp}{p}%
+  }.\@\space\ignorespaces
+  #2%
+  \par
+}
+\newcommand*{\urlindex@pfill}{% from \pfill of package `doc'
+  \unskip~\urlindex@dotfill
+  \penalty500\strut\nobreak
+  \urlindex@dotfil~\ignorespaces
+}
+\newcommand*{\urlindex@dotfill}{% from \dotfill of package `doc'
+  \leaders\hbox to.6em{\hss .\hss}\hskip\z@ plus  1fill\relax
+}
+\newcommand*{\urlindex@dotfil}{% from \dotfil of package `doc'
+  \leaders\hbox to.6em{\hss .\hss}\hfil
+}
+\makeatother
+
+
+
 
 
 % Final pages
@@ -315,6 +401,13 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 \end{frame}
 
+
+\begin{frame}[allowframebreaks]
+  \frametitle{URLs}
+
+  \printurls
+
+\end{frame}
 
 
 \setbeamercolor{background canvas}{bg=WPIcrimson}
