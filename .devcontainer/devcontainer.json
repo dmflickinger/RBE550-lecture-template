@@ -1,0 +1,24 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/docker-existing-dockerfile
+{
+    "name": "RBE Lecture Template",
+    "context": "..",
+    "image": "ubuntu:latest",
+    // "dockerFile": "Dockerfile",
+
+	"postCreateCommand": "./.devcontainer/installDepsAndTemplates.sh",
+    "customizations": {
+		"vscode": {
+			"extensions": [
+				"Gruntfuggly.todo-tree",
+				"mutantdino.resourcemonitor",
+				"DavidAnson.vscode-markdownlint",
+				"ms-vscode.makefile-tools",
+				"joaompinto.vscode-graphviz",
+				"ms-azuretools.vscode-docker",
+				"streetsidesoftware.code-spell-checker",
+				"James-Yu.latex-workshop"
+			]
+		}
+	}
+}
