@@ -1,4 +1,6 @@
-FROM fedora:34
+FROM fedora:latest
+
+# TODO: update this container to build everything (and migrate to ubuntu like the development container)
 
 WORKDIR /source
 
