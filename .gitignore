@@ -12,3 +12,4 @@
 *.gz
 *.m4v
 !fig/placeholder.pdf
+bib
