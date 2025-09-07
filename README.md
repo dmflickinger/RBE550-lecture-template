@@ -18,7 +18,6 @@ Obtain the [RBE resources](https://github.com/dmflickinger/RBE550resources) proj
 ## Build
 
 ```sh
-mkdir lectureSlides
-docker build -t rbe_lecture .
-docker run -it --rm -v .:/source -v lectureSlides:/output -v ../rbe_resources:/bib rbe_lecture
+docker build -t rbe-lecture-template .
+podman run --rm -v .:/source -v ./output:/output -v ./bib:/bib rbe-lecture-template
 ```

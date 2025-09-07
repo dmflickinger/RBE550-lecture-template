@@ -4,18 +4,20 @@
 
 lecture_name = RBE-550_lecture_template
 
+LATEX_BUILD = xelatex -shell-escape -interaction=nonstopmode -file-line-error
+
 VENV_ACTIVATE = . /lecturetemplate/venv/bin/activate
 
 all : document audio video
 document: $(lecture_name).tex
 #	$(MAKE) -C diagrams
-	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
-	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
+	$(LATEX_BUILD) $(lecture_name)
+	$(LATEX_BUILD) $(lecture_name)
 	makeindex $(lecture_name)-url
 	bibtex $(lecture_name)
 	bibtex $(lecture_name)
-	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
-	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
+	$(LATEX_BUILD) $(lecture_name)
+	$(LATEX_BUILD) $(lecture_name)
 
 audio:
 	mkdir -p audio_output

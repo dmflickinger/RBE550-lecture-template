@@ -63,3 +63,4 @@ ENTRYPOINT [ "/usr/local/bin/build.sh" ]
 # FIXME: volumes should be defined
 #VOLUME [ "/source" "/output" "/bib"]
 
+# NOTE: podman run --rm -v .:/source -v ./output:/output -v ./bib:/bib rbe550-lecture-template
