@@ -20,3 +20,6 @@ ffmpeg
 python3-gtts
 python3-pydub
 python3-pypdf2
+python3-moviepy
+python3-pip
+python3-venv

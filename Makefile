@@ -4,6 +4,7 @@
 
 lecture_name = RBE-550_lecture_template
 
+VENV_ACTIVATE = . /lecturetemplate/venv/bin/activate
 
 all : document audio video
 document: $(lecture_name).tex
@@ -16,23 +17,27 @@ document: $(lecture_name).tex
 	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
 	xelatex -shell-escape -interaction=nonstopmode -file-line-error $(lecture_name)
 
-audio: document
+audio:
 	mkdir -p audio_output
-	python3 unitTests/createAudioFiles.py RBE-550_lecture_template.pdf audio_output
+	$(VENV_ACTIVATE) && python3 unitTests/createAudioFiles.py RBE-550_lecture_template.pdf audio_output
 
-video: document audio $(lecture_name).pdf
-	encodeVideo.sh $(lecture_name)
+video:
+	mkdir -p slide_output
+	$(VENV_ACTIVATE) && python3 scripts/encodeVideo.py
+	rmdir slide_output
 
 install: document audio video
 	cp -f $(lecture_name).pdf /output/
-#	cp -f $(lecture_name).m4v /output/
+	cp -f $(lecture_name).mp4 /output/
 	cp -f $(lecture_name)_slides.tar.gz /output/
 
 clean :
 	rm -f $(lecture_name).pdf
 	rm -f $(lecture_name).m4v
+	rm -f $(lecture_name).mp4
 	rm -f $(lecture_name)_slides.tar.gz
 	rm -rf audio_output
+	rm -rf slide_output
 	rm -f *.out
 	rm -f *.log
 	rm -f *.aux

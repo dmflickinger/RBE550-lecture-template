@@ -1,3 +1,7 @@
+"""! @file
+     @brief utility that creates a series of audio files by running text-to-speech on slides in a PDF
+"""
+
 import argparse
 
 from gtts import gTTS
@@ -23,5 +27,5 @@ if __name__ == "__main__":
 
         page_idx = 1
         for page in reader.pages:
-            save_mp3(page.extract_text(), f"{args.output}/slide_{page_idx}.mp3")
+            save_mp3(page.extract_text(), f"{args.output}/slide_{page_idx}")
             page_idx += 1

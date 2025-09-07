@@ -9,7 +9,12 @@ apt-get update
 apt-get install -y $(cat .devcontainer/dependencies.txt) 
 
 
+# Set up Python virtual environment
+# ---------------------------------
 
+python3 -m venv /lecturetemplate/venv
+source /lecturetemplate/venv/bin/activate
+/lecturetemplate/venv/bin/pip3 install imageio[ffmpeg] PyPDF2 moviepy natsort pathlib gtts
 
 # Install resources (bibliography)
 # --------------------------------
