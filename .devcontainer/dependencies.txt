@@ -19,3 +19,4 @@ poppler-utils
 ffmpeg
 python3-gtts
 python3-pydub
+python3-pypdf2

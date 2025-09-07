@@ -13,3 +13,9 @@
 *.m4v
 !fig/placeholder.pdf
 bib
+audio_output
+RBE-550_lecture_template-url.idx
+RBE-550_lecture_template-url.ilg
+.gitignore
+RBE-550_lecture_template-url.ind
+RBE-550_lecture_template-url.mst
