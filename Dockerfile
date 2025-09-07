@@ -9,6 +9,7 @@ RUN mkdir -p /source \
     && mkdir -p /bib
 
 COPY .devcontainer/dependencies.txt /tmp/
+COPY .devcontainer/python_dependencies.txt /tmp/
 
 # Install dependencies
 # --------------------
@@ -23,7 +24,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN python3 -m venv /lecturetemplate/venv \
     && . /lecturetemplate/venv/bin/activate \
-    && /lecturetemplate/venv/bin/pip3 install imageio[ffmpeg] PyPDF2 moviepy natsort pathlib gtts
+    && /lecturetemplate/venv/bin/pip3 install -r /tmp/python_dependencies.txt
 
 # Install resources (bibliography)
 # --------------------------------

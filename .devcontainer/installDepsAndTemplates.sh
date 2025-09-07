@@ -14,7 +14,7 @@ apt-get install -y $(cat .devcontainer/dependencies.txt)
 
 python3 -m venv /lecturetemplate/venv
 source /lecturetemplate/venv/bin/activate
-/lecturetemplate/venv/bin/pip3 install imageio[ffmpeg] PyPDF2 moviepy natsort pathlib gtts
+/lecturetemplate/venv/bin/pip3 install -r .devcontainer/python_dependencies.txt
 
 # Install resources (bibliography)
 # --------------------------------
