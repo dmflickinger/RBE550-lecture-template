@@ -1,7 +1,6 @@
-from gtts import gTTS
-import os
-from pydub import AudioSegment
 import argparse
+
+from gtts import gTTS
 from PyPDF2 import PdfReader
 
 def save_mp3(text, filename):
