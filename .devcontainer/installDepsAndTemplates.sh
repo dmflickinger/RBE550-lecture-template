@@ -42,5 +42,5 @@ mktexlsr $(kpsewhich -var-value=TEXMFLOCAL)
 # Install the video encoding script
 # ---------------------------------
 
-cp -f scripts/encodeVideo.sh /usr/local/bin/
+cp -f scripts/encodeVideo.py /usr/local/bin/
 cp -f scripts/buildLectureVideo.sh /usr/local/bin/
