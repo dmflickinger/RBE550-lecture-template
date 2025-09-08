@@ -4,31 +4,41 @@
 
 \section{Introduction}
 
-\begin{frame}[label=TESTFRAME]
-\frametitle{Test Frame}
-\framesubtitle{Longer title for this frame}
+\begin{frame}[label=introduction]
+\frametitle{Introduction}
+\framesubtitle{RBE Lecture Template Overview}
 
-\lipsum[4]
+This template provides a class for creating course lectures in \LaTeX.  
+
+\end{frame}
+
+
+
+\section{Container}
+
+\begin{frame}[label=buildContainer]
+
+Containers are provided with this template to support rapid development:
+
+\begin{columns}
+  \begin{column}{0.5\textwidth}
+    Development container for VSCode
+  \end{column}
+  \begin{column}{0.5\textwidth}
+    Standalone container for rapid builds
+  \end{column}
+\end{columns}
+
 
 \end{frame}
 
+\section{Features}
 
-
-\section{Background}
-
-\begin{frame}[label=TESTFRAME2]
-\frametitle{Another Test Frame}
-\framesubtitle{An even longer title for this testing frame}
-
-\lipsum[4]
-
-\end{frame}
 
 
 \begin{frame}[label=URLFRAME]
-\frametitle{Websites to see}
+\frametitle{Embedded Links}
 
-Here are some websites:
 
 \begin{itemize}
     \item \href{https://www.wpi.edu}{WPI}
@@ -40,11 +50,12 @@ Here are some websites:
 \end{frame}
 
 
+
 \begin{frame}[label=MATHFRAME]
-\frametitle{Math time}
+\frametitle{Equations}
 \framesubtitle{Now it's time to do some math}
 
-\lipsum[2]
+Embed equations in slides:
 
 \begin{equation}
 2 \cdot a^{2} \cdot x^{3} - b^{2} \cdot x^{2} + c \cdot x + 5 = 0
@@ -57,11 +68,8 @@ Source: \cite{LaValle}
 
 
 
-
-\section{Code}
-
 \begin{frame}[fragile,label=CODEFRAME]
-\frametitle{Code Example}
+\frametitle{Source Listings}
 \framesubtitle{A short coding example}
 
 \begin{lstlisting}[language=C,basicstyle=\ttfamily]
@@ -81,13 +89,13 @@ int main(int argc, char** argv)
 
 
 \begin{frame}
-    \frametitle{Sourced figure}
+    \frametitle{Figures with Sources}
 
 
     \begin{columns}
         \begin{column}{0.7\textwidth}
 
-            A generic sourced figure.
+            A generic sourced figure, using \\citeFigure
 
         \end{column}
         \begin{column}{0.3\textwidth}
@@ -103,11 +111,12 @@ int main(int argc, char** argv)
 
 
 
-\begin{frame}
-\frametitle{Algorithm}
+\begin{frame}[allowframebreaks]
+\frametitle{Algorithms}
 
+% FIXME: probably need to switch from algorithm to algorithmic to get frame breaks to work correctly
 
-
+Embed algorithms (with frame breaks):
 
 \begin{algorithm}[H]
 

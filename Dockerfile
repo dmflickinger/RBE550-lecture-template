@@ -1,112 +1,74 @@
-FROM fedora:34
+FROM ubuntu:latest
+
 
 WORKDIR /source
-
-# Install packages (mainly texlive)
-# =================================
-
-
-RUN dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-		   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
-    && dnf clean all
-
-
-RUN dnf install -y texlive-adjustbox \
-                   texlive-background \
-                   texlive-bibtex \
-                   texlive-biblatex \
-                   texlive-biblatex-ieee \
-                   texlive-ccfonts \
-                   texlive-changepage \
-                   texlive-chktex \
-                   texlive-comfortaa \
-                   texlive-datetime \
-                   texlive-datetime2 \
-                   texlive-dot2texi \
-                   texlive-draftwatermark \
-                   texlive-droid \
-                   texlive-electrum \
-                   texlive-epigraph \
-                   texlive-euro-ce \
-                   texlive-fontawesome \
-                   texlive-fontawesome5 \
-                   texlive-collection-fontsrecommended \
-                   texlive-fourier \
-                   texlive-ifmtarg \
-		           texlive-IEEEtran \
-                   texlive-inconsolata \
-                   texlive-kpfonts \
-                   texlive-lastpage \
-                   texlive-listing \
-                   texlive-makecmds \
-                   texlive-mathdots \
-                   texlive-mathspec \
-                   texlive-mdframed \
-                   texlive-metafont \
-                   texlive-minted \
-                   texlive-mnsymbol \
-                   texlive-multirow \
-                   texlive-pdfcrop \
-                   texlive-pgfgantt \
-                   texlive-pgfopts \
-                   texlive-pgf-blur \
-                   texlive-pygmentex \
-                   texlive-roboto \
-                   texlive-sectsty \
-                   texlive-siunitx \
-                   texlive-smartdiagram \
-                   texlive-sourcecodepro \
-                   texlive-subfigmat \
-                   texlive-svg \
-                   texlive-tcolorbox \
-                   texlive-titlesec \
-                   texlive-titling \
-                   texlive-tocloft \
-                   texlive-todonotes \
-                   texlive-wrapfig \
-                   texlive-xifthen \
-                   texlive-xtab \
-                   texlive-xetex \
-                   texlive-beamer \
-                   texlive-nextpage \
-                   texlive-fancybox \
-                   texlive-algorithm2e \
-                   texlive-progressbar \
-                   graphviz \
-                   make \
-                   ossobuffo-jura-fonts \
-		           poppler-utils \
-                   python3-pygments \
-                   python3-pygments-style-solarized \
-                   which \
-		           ffmpeg \
-    && dnf clean all
-
-
-
 
 
 RUN mkdir -p /source \
     && mkdir -p /output \
     && mkdir -p /bib
 
-COPY fig/*.pdf /usr/local/share/LaTeX_templates/RBE550_lecture/fig/
+COPY .devcontainer/dependencies.txt /tmp/
+COPY .devcontainer/python_dependencies.txt /tmp/
 
-COPY template/RBElecture.cls /usr/share/texlive/texmf-local/tex/latex/RBElecture/
-COPY template/fig/*.png /usr/share/texlive/texmf-local/tex/latex/RBElecture/fig/
+# Install dependencies
+# --------------------
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
+    && apt-get install -y $(cat /tmp/dependencies.txt) \
+    && apt-get clean all
 
+
+# Install fonts
+# -------------
+
+RUN npm install -g google-font-installer \
+    && mkdir -p /usr/share/fonts/googlefonts \
+    && gfi download orbitron -d /usr/share/fonts/googlefonts \
+    && fc-cache -fv
+
+# Set up Python virtual environment
+# ---------------------------------
+
+RUN python3 -m venv /lecturetemplate/venv \
+    && . /lecturetemplate/venv/bin/activate \
+    && /lecturetemplate/venv/bin/pip3 install -r /tmp/python_dependencies.txt
+
+# Install resources (bibliography)
+# --------------------------------
+
+RUN rm -rf /bib \
+    && git clone https://github.com/dmflickinger/RBE550resources.git bib
+
+
+# Install assignments template
+# ----------------------------
+
+COPY template/RBElecture.cls /tmp/template/
+COPY template/fig/*.png /tmp/template/fig/
+
+RUN mkdir -p $(kpsewhich -var-value=TEXMFLOCAL)/tex/latex/RBElecture/fig \
+    && cp -f /tmp/template/RBElecture.cls $(kpsewhich -var-value=TEXMFLOCAL)/tex/latex/RBElecture/ \
+    && cp -f /tmp/template/fig/*.png $(kpsewhich -var-value=TEXMFLOCAL)/tex/latex/RBElecture/fig/
+
+
+# Register the RBE assignment class with texlive
+# ----------------------------------------------
+
+RUN tlmgr conf texmf TEXMFLOCAL $(kpsewhich -var-value=TEXMFLOCAL) \
+    && mktexlsr $(kpsewhich -var-value=TEXMFLOCAL)
+
+
+# Install the video encoding script
+# ---------------------------------
+
+COPY scripts/encodeVideo.py /usr/local/bin/
+COPY scripts/buildLectureVideo.sh /usr/local/bin/
 COPY scripts/build.sh /usr/local/bin/
-COPY scripts/encodeVideo.sh /usr/local/bin/
-
-
-# Register the RBE lecture class with texlive
-RUN tlmgr conf texmf TEXMFHOME /usr/share/texlive/texmf-local \
-    && mktexlsr /usr/share/texlive/texmf-local
-
-
 
 ENTRYPOINT [ "/usr/local/bin/build.sh" ]
 
 # FIXME: volumes should be defined
 #VOLUME [ "/source" "/output" "/bib"]
 
+# NOTE: podman run --rm -v .:/source -v ./output:/output -v ./bib:/bib rbe550-lecture-template

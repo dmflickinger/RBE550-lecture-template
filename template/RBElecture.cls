@@ -37,12 +37,15 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 \RequirePackage[utf8]{inputenc}
 
 % \RequirePackage{palatino}
-\RequirePackage[T1]{fontenc}
+% \RequirePackage[T1]{fontenc}
 
-\RequirePackage{fontawesome}
+\RequirePackage[sfdefault]{roboto}
 
 \RequirePackage{fontspec}
-\setsansfont{Jura}
+\setsansfont{Orbitron-800.ttf}
+\RequirePackage{fontawesome}
+
+% \setsansfont{Jura}
 % NOTE: Jura is a stand-in for Eurostile
 
 

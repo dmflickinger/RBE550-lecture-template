@@ -11,4 +11,14 @@
 *.vrb
 *.gz
 *.m4v
+*.mp3
+*.mp4
 !fig/placeholder.pdf
+bib
+audio_output
+RBE-550_lecture_template-url.idx
+RBE-550_lecture_template-url.ilg
+.gitignore
+RBE-550_lecture_template-url.ind
+RBE-550_lecture_template-url.mst
+
