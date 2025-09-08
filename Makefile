@@ -31,13 +31,11 @@ video:
 install: document audio video
 	cp -f $(lecture_name).pdf /output/
 	cp -f $(lecture_name).mp4 /output/
-	cp -f $(lecture_name)_slides.tar.gz /output/
 
 clean :
 	rm -f $(lecture_name).pdf
 	rm -f $(lecture_name).m4v
 	rm -f $(lecture_name).mp4
-	rm -f $(lecture_name)_slides.tar.gz
 	rm -rf audio_output
 	rm -rf slide_output
 	rm -f *.out

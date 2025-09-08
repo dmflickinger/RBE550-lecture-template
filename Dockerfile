@@ -56,7 +56,7 @@ RUN tlmgr conf texmf TEXMFLOCAL $(kpsewhich -var-value=TEXMFLOCAL) \
 
 COPY scripts/encodeVideo.py /usr/local/bin/
 COPY scripts/buildLectureVideo.sh /usr/local/bin/
-
+COPY scripts/build.sh /usr/local/bin/
 
 ENTRYPOINT [ "/usr/local/bin/build.sh" ]
 
