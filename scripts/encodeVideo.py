@@ -74,10 +74,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Encode a video from PDF and a directory of audio files")
     parser.add_argument("pdf", help="path to PDF file with slides")
     parser.add_argument("audio_dir", help="directory with audio files (one per slide)")
-    parser.add_argument("output", "video output file")
+    parser.add_argument("video_output", help="video output file")
     args = parser.parse_args()
 
     # TODO: check that audio output directory exists
     # TODO: create slide_output directory
 
-    create_video(pdf_file=args.pdf, audio_dir=args.audio_dir, output_file=args.output)
+    create_video(pdf_file=args.pdf, audio_dir=args.audio_dir, output_file=args.video_output)
