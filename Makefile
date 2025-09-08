@@ -25,7 +25,7 @@ audio:
 
 video:
 	mkdir -p slide_output
-	$(VENV_ACTIVATE) && python3 scripts/encodeVideo.py
+	$(VENV_ACTIVATE) && python3 scripts/encodeVideo.py RBE-550_lecture_template.pdf audio_output RBE-550_lecture_template.mp4
 	rmdir slide_output
 
 install: document audio video
