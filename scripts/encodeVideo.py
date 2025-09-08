@@ -5,6 +5,8 @@ from moviepy import *
 from pathlib import Path
 from natsort import natsorted
 
+import argparse
+
 
 
 def create_video(pdf_file, audio_dir, output_file):
@@ -69,13 +71,13 @@ def create_video(pdf_file, audio_dir, output_file):
 
 if __name__ == "__main__":
 
-    # TODO: add argument parsing
+    parser = argparse.ArgumentParser(description="Encode a video from PDF and a directory of audio files")
+    parser.add_argument("pdf", help="path to PDF file with slides")
+    parser.add_argument("audio_dir", help="directory with audio files (one per slide)")
+    parser.add_argument("output", "video output file")
+    args = parser.parse_args()
 
     # TODO: check that audio output directory exists
     # TODO: create slide_output directory
 
-    pdf_file = 'RBE-550_lecture_template.pdf'
-    audio_dir = 'audio_output'
-    output_file = 'RBE-550_lecture_template.mp4'
-
-    create_video(pdf_file, audio_dir, output_file)
+    create_video(pdf_file=args.pdf, audio_dir=args.audio_dir, output_file=args.output)
