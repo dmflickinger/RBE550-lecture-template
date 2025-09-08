@@ -9,6 +9,15 @@ apt-get update
 apt-get install -y $(cat .devcontainer/dependencies.txt) 
 
 
+# Install fonts
+# -------------
+
+npm install -g google-font-installer
+
+mkdir -p /usr/share/fonts/googlefonts
+gfi download orbitron -d /usr/share/fonts/googlefonts
+fc-cache -fv
+
 # Set up Python virtual environment
 # ---------------------------------
 
@@ -29,7 +38,6 @@ ln -s ${PWD}/bib /bib
 mkdir -p $(kpsewhich -var-value=TEXMFLOCAL)/tex/latex/RBElecture/fig
 cp -f template/RBElecture.cls $(kpsewhich -var-value=TEXMFLOCAL)/tex/latex/RBElecture/
 cp -f template/fig/*.png $(kpsewhich -var-value=TEXMFLOCAL)/tex/latex/RBElecture/fig/
-cp -f template/fig/*.pdf $(kpsewhich -var-value=TEXMFLOCAL)/tex/latex/RBElecture/fig/
 
 
 # Register the RBE assignment class with texlive

@@ -19,6 +19,14 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get clean all
 
 
+# Install fonts
+# -------------
+
+RUN npm install -g google-font-installer \
+    && mkdir -p /usr/share/fonts/googlefonts \
+    && gfi download orbitron -d /usr/share/fonts/googlefonts \
+    && fc-cache -fv
+
 # Set up Python virtual environment
 # ---------------------------------
 
