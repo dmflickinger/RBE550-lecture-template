@@ -42,7 +42,7 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 \RequirePackage[sfdefault]{roboto}
 
 \RequirePackage{fontspec}
-\setsansfont{Orbitron-800.ttf}
+\setsansfont{Orbitron-ExtraBold.ttf}
 \RequirePackage{fontawesome}
 
 % \setsansfont{Jura}
