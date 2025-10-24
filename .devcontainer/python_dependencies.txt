@@ -6,3 +6,6 @@ pathlib
 gtts
 pydub
 pdf2image
+python-rtmidi
+PyFluidSynth
+audioop-lts
