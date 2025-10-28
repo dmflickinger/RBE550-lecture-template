@@ -6,7 +6,7 @@ lecture_name = RBE-550_lecture_template
 
 LATEX_BUILD = xelatex -shell-escape -interaction=nonstopmode -file-line-error
 
-VENV_ACTIVATE = . /lecturetemplate/venv/bin/activate
+VENV_ACTIVATE = . venv/bin/activate
 
 all : document audio video
 document: $(lecture_name).tex
@@ -19,11 +19,15 @@ document: $(lecture_name).tex
 	$(LATEX_BUILD) $(lecture_name)
 	$(LATEX_BUILD) $(lecture_name)
 
-audio:
+venv:
+	python3 -m venv venv
+	$(VENV_ACTIVATE) && python3 -m pip install -r audioGenerator/python_requirements.txt
+
+audio: venv
 	mkdir -p audio_output
 	$(VENV_ACTIVATE) && python3 unitTests/createAudioFiles.py RBE-550_lecture_template.pdf audio_output
 
-video:
+video: venv
 	mkdir -p slide_output
 	$(VENV_ACTIVATE) && python3 scripts/encodeVideo.py RBE-550_lecture_template.pdf audio_output RBE-550_lecture_template.mp4
 	rmdir slide_output
@@ -52,3 +56,4 @@ clean :
 	rm -f *.ilg
 	rm -f *.ind
 	rm -f *.mst
+	rm -rf venv
