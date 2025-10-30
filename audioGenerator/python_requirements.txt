@@ -4,4 +4,3 @@ scipy
 python-rtmidi
 PyFluidSynth
 pydub
-audioop-lts
