@@ -8,7 +8,7 @@ VENV_ACTIVATE = . venv/bin/activate
 
 all : document audio video
 document: $(lecture_name).tex
-# 	$(MAKE) -C diagrams
+	$(MAKE) -C diagrams
 	$(LATEX_BUILD) $(lecture_name)
 	$(LATEX_BUILD) $(lecture_name)
 	makeindex $(lecture_name)-url
