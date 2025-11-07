@@ -260,12 +260,10 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
 \author[]{\sffamily\textbf{\myRBEtitleframeAuthor}}
-
+\date{}
 \institute[WPI]
 {\includegraphics[width=0.25\textwidth]{fig/WPI_Inst_Prim_FulClr.png}
 }
-
-% \date{\tiny{Last updated: \today}}
 
 % Temporarily adjust header height to 2mm, only for title page
 \begingroup
