@@ -23,7 +23,7 @@ RBE-550_lecture_template-url.ind
 RBE-550_lecture_template-url.mst
 
 audioGenerator/output.wav
-audioGenerator/Jnsgm2.sf2
 
 venv
 simple_midi.mid
+*.sf2

@@ -6,6 +6,8 @@ LATEX_BUILD = xelatex -shell-escape -interaction=nonstopmode -file-line-error
 
 VENV_ACTIVATE = . venv/bin/activate
 
+SOUND_FONT = audioGenerator/R-newage.sf2
+
 all : document testaudio audio video
 document: $(lecture_name).tex
 	$(MAKE) -C diagrams
@@ -31,10 +33,10 @@ audio: venv
 	$(VENV_ACTIVATE) \
 	&& python3 audioGenerator/createMIDI_title_slide.py \
 	&& python3 audioGenerator/createMIDI_outline_slide.py
-	fluidsynth -F "temp.wav" audioGenerator/Jnsgm2.sf2 "audio_transitions/title_slide.mid"
+	fluidsynth -F "temp.wav" $(SOUND_FONT) "audio_transitions/title_slide.mid"
 	lame "temp.wav"
 	mv temp.mp3 audio_transitions/title_slide.mp3
-	fluidsynth -F "temp.wav" audioGenerator/Jnsgm2.sf2 "audio_transitions/outline_slide.mid"
+	fluidsynth -F "temp.wav" $(SOUND_FONT) "audio_transitions/outline_slide.mid"
 	lame "temp.wav"
 	mv temp.mp3 audio_transitions/outline_slide.mp3
 	rm -f temp.wav
