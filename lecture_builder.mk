@@ -6,7 +6,7 @@ LATEX_BUILD = xelatex -shell-escape -interaction=nonstopmode -file-line-error
 
 VENV_ACTIVATE = . venv/bin/activate
 
-all : document audio video
+all : document testaudio audio video
 document: $(lecture_name).tex
 	$(MAKE) -C diagrams
 	$(LATEX_BUILD) $(lecture_name)
