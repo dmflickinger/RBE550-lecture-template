@@ -11,3 +11,4 @@ pathlib
 gtts
 midiutil
 midi2audio
+pdf2image

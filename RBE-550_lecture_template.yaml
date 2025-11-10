@@ -1,0 +1,9 @@
+slides:
+  - title: RBE 550 Lecture Template
+  - count: 16
+  - titleslide: 1
+  - outline: {2, 4, 6}
+  - endbuffer: 13
+  - sources: {14}
+  - urls: 15
+  - endslide: 16

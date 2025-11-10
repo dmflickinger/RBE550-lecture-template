@@ -42,10 +42,10 @@ audio: venv
 	rm -f audio_transitions/outline_slide.mid
 
 
-video: venv audio
+video: venv document audio testaudio
 	mkdir -p slide_output
-	$(VENV_ACTIVATE) && python3 scripts/encodeVideo.py RBE-550_lecture_template.pdf audio_output RBE-550_lecture_template.mp4
-	rmdir slide_output
+	$(VENV_ACTIVATE) && python3 scripts/encodeVideo.py $(lecture_name).pdf $(lecture_name).yaml audio_output audio_transitions/title_slide.mp3 audio_transitions/outline_slide.mp3 $(lecture_name).mp4
+	rm -rf slide_output
 
 
 install: document audio video
