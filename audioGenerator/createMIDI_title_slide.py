@@ -24,5 +24,5 @@ time += duration
 midi.addNote(track, channel, 65, time, duration, volume) # F4
 
 # Save the MIDI file
-with open("simple_midi.mid", "wb") as output_file:
+with open("audio_transitions/title_slide.mid", "wb") as output_file:
     midi.writeFile(output_file)
