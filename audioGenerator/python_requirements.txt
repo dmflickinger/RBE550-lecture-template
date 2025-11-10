@@ -9,3 +9,5 @@ moviepy
 natsort
 pathlib
 gtts
+midiutil
+midi2audio

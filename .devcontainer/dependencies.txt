@@ -31,3 +31,5 @@ python3-dev
 fluidsynth
 ffmpeg
 alsa-utils
+libavutil-dev
+lame

@@ -26,9 +26,17 @@ testaudio: venv
 	mkdir -p audio_output
 	$(VENV_ACTIVATE) && python3 unitTests/createAudioFiles.py RBE-550_lecture_template.pdf audio_output
 
-audio: venv
+audio:
 	mkdir -p audio_transitions
-	$(VENV_ACTIVATE) && python3 audioGenerator/audioGenerator.py audioGenerator/audio_cfg.yaml audioGenerator/notes_title.txt audio_transitions/title_slide.mp3
+	fluidsynth -F "temp.wav" audioGenerator/Jnsgm2.sf2 "simple_midi.mid"
+	lame "temp.wav"
+	mv temp.mp3 audio_transitions/title_slide.mp3
+	rm -f temp.wav 
+
+
+# 	$(VENV_ACTIVATE) \
+	&& python3 audioGenerator/createMIDI.py \
+	&& python3 audioGenerator/audioGenerator.py -o audio_transitions/title_slide.mp3 -m simple_midi.mid -s audioGenerator/Jnsgm2.sf2
 
 
 video: venv audio
