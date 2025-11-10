@@ -5,6 +5,7 @@ import argparse
 import fluidsynth
 import os
 from pydub import AudioSegment
+import time
 
 class AudioGenerator:
     """! @brief Audio generator class using FluidSynth for sound synthesis.
@@ -61,9 +62,9 @@ class AudioGenerator:
                 # Map frequency to MIDI note number
                 midi_note = self.freq_to_midi(frequency)
                 self.synth.noteon(0, midi_note, 127)
-                fluidsynth.sleep(duration)
+                time.sleep(duration)
                 self.synth.noteoff(0, midi_note)
-                fluidsynth.sleep(0.1)  # Short pause between notes
+                time.sleep(0.1)  # Short pause between notes
 
         return temp_wav_file
 
