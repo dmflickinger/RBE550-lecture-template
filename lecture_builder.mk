@@ -6,7 +6,7 @@ LATEX_BUILD = xelatex -shell-escape -interaction=nonstopmode -file-line-error
 
 VENV_ACTIVATE = . venv/bin/activate
 
-SOUND_FONT = audioGenerator/R-newage.sf2
+SOUND_FONT = FluidR3_GM.sf2 
 
 all : document testaudio audio video
 document: $(lecture_name).tex
