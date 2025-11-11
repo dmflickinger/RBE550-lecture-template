@@ -14,14 +14,37 @@ channel = 0
 volume = 100  # 0-127
 duration = 1  # In beats
 
-# Example notes: Middle C, D, E, F
-midi.addNote(track, channel, 60, time, duration, volume) # C4
+channel = 1 # bass line
+midi.addNote(track, channel, 48, time, duration, volume) # C3
 time += duration
-midi.addNote(track, channel, 62, time, duration, volume) # D4
+midi.addNote(track, channel, 45, time, duration, volume) # G3
+time += duration
+midi.addNote(track, channel, 43, time, duration, volume) # F3
+time += duration
+midi.addNote(track, channel, 41, time, duration, volume) # E3
+time += duration
+midi.addNote(track, channel, 39, time, duration, volume) # D3
+
+channel = 2 # pad/atmosphere
+time = 0
+midi.addNote(track, channel, 60, time, duration, volume) # C4
 time += duration
 midi.addNote(track, channel, 64, time, duration, volume) # E4
 time += duration
-midi.addNote(track, channel, 65, time, duration, volume) # F4
+midi.addNote(track, channel, 67, time, duration, volume) # G4
+time += duration
+midi.addNote(track, channel, 71, time, duration, volume) # B4
+time += duration
+midi.addNote(track, channel, 76, time, duration, volume) # C5
+
+channel = 3 # Subtle Rythm
+time = 0
+midi.addNote(track, channel, 36, time, duration, volume) # kick drum
+time += duration
+midi.addNote(track, channel, 36, time, duration, volume) # kick drum
+time += duration
+midi.addNote(track, channel, 36, time, duration, volume) # kick drum
+
 
 # Save the MIDI file
 with open("audio_transitions/title_slide.mid", "wb") as output_file:
