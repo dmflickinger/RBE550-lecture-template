@@ -224,12 +224,16 @@ def render_grid(grid, dh):
     for row in range(len(grid)):
         for col in range(len(grid[row])):
             if 0 != grid[row][col]:
-                dh.rectangle([
-                    grid_x + col * grid_sq,
-                    grid_y + row * grid_sq,
-                    grid_x + (col + 1) * grid_sq,
-                    grid_y + (row + 1) * grid_sq
-                ], fill=ega_colors[grid[row][col]])
+                color = ega_colors[grid[row][col]]
+            else:
+                color = ega_colors[7]
+                
+            dh.rectangle([
+                grid_x + col * grid_sq,
+                grid_y + row * grid_sq,
+                grid_x + (col + 1) * grid_sq,
+                grid_y + (row + 1) * grid_sq
+                ], fill=color)
 
 def render_debug(target_row, turns_remaining, dh):
     """ render debugging marks
@@ -261,19 +265,30 @@ def render_debug(target_row, turns_remaining, dh):
         ], fill=ega_colors[15])
         
 
-def render_background(dh):
+def render_background(dh, bg_img):
     """ render the background
     """
 
-    # make white background
+    # make gray background
     dh.rectangle([0, 0, width, height], fill=ega_colors[7])
 
     # make red stripe at top
     dh.rectangle([0, 0, width, grid_sq], fill=ega_colors[4])
 
-    # TODO: draw low-res WPI logo
+    # draw low-res WPI logo
+    # FIXME: image overlay not working
 
-    # TODO: draw text at bottom, saying "LOADING LECTURE n ..."
+
+    # FIXME: pull image from container FS
+    try:
+        overlay_image = Image.open("../template/fig/WPI_lowres.png")
+    except FileNotFoundError:
+        print("failed to load overlay image for WPI logo")
+        exit()
+
+    bg_img.paste(overlay_image, (200, 250), overlay_image)
+
+    #  draw text at bottom, saying "LOADING LECTURE n ..."
     font = ImageFont.truetype("/usr/share/fonts/googlefonts/Orbitron-800.ttf", size=30)
 
     lecture_num = 0 # FIXME: get lecture number from command line argument
@@ -287,6 +302,7 @@ def render_background(dh):
 # Create a list to hold all frames
 frames = []
 
+
 # Create an empty grid
 main_grid = create_empty_grid(grid_width, grid_height)
 
@@ -299,6 +315,11 @@ y_goal = 4
 frame_count = 0
 move_count = 0
 rot_count = 0
+
+img = Image.new('P', (width, height), color=0)
+draw = ImageDraw.Draw(img)
+
+render_background(draw, img)
 
 while frame_count < 100000:
 
@@ -347,11 +368,10 @@ while frame_count < 100000:
 
 
 
-    # Draw the current frame with all tetrominos in place
-    img = Image.new('P', (width, height), color=0)  # Black background
-    draw = ImageDraw.Draw(img)
+    # img = Image.new('P', (width, height), color=0)
+    # draw = ImageDraw.Draw(img)
 
-    render_background(draw)
+    # render_background(draw, img)
     # render_debug(y_goal, rot_count, draw)
     render_grid(main_grid, draw)
 
