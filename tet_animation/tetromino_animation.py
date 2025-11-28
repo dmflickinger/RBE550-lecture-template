@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import random
 import math
 
@@ -266,13 +266,22 @@ def render_background(dh):
     """
 
     # make white background
-    draw.rectangle([0, 0, width, height], fill=ega_colors[7])
+    dh.rectangle([0, 0, width, height], fill=ega_colors[7])
 
     # make red stripe at top
-    draw.rectangle([0, 0, width, grid_sq], fill=ega_colors[4])
+    dh.rectangle([0, 0, width, grid_sq], fill=ega_colors[4])
 
     # TODO: draw low-res WPI logo
+
     # TODO: draw text at bottom, saying "LOADING LECTURE n ..."
+    font = ImageFont.truetype("/usr/share/fonts/googlefonts/Orbitron-800.ttf", size=30)
+
+    lecture_num = 0 # FIXME: get lecture number from command line argument
+    text_content = f"LOADING LECTURE #{lecture_num} ..."
+    text_color = (0, 0, 0)  # White color (RGB)
+    text_position = (5, 300)     # X, Y coordinates
+
+    dh.text(text_position, text_content, fill=text_color, font=font)
 
 
 # Create a list to hold all frames
