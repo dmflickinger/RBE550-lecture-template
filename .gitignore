@@ -33,3 +33,4 @@ venv
 simple_midi.mid
 *.sf2
 tet_animation/tetromino_animation.gif
+animation_output/*

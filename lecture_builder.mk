@@ -43,6 +43,9 @@ audio: venv
 	rm -f audio_transitions/title_slide.mid
 	rm -f audio_transitions/outline_slide.mid
 
+titleanim: venv
+	mkdir -p animation_output
+	$(VENV_ACTIVATE) && python3 tet_animation/tetromino_animation.py -n $(lecture_number) -d 5 -o animation_output/title_$(lecture_number)_$(lecture_name).gif
 
 video: venv document audio testaudio
 	mkdir -p slide_output
@@ -62,6 +65,7 @@ clean :
 	rm -rf audio_output
 	rm -rf audio_transitions
 	rm -rf slide_output
+	rm -rf animation_output
 	rm -f *.out
 	rm -f *.log
 	rm -f *.aux

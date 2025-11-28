@@ -5,4 +5,7 @@
 lecture_name = RBE-550_lecture_template
 export lecture_name
 
+lecture_number = 0
+export lecture_number
+
 include lecture_builder.mk
