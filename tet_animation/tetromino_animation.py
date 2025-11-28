@@ -182,11 +182,12 @@ def find_best_fit(grid, shape):
                 if not collision_check(grid, shape, _c, _r):
                     place_tetromino(shadow_grid, shape, _c - 1, _r, 1)
 
-                    cfg_score = 0.2 * calc_total_height(shadow_grid)
+                    cfg_score = 0.1 * calc_total_height(shadow_grid)
                     cfg_score += 0.2 * calc_holes(shadow_grid)
                     cfg_score += 0.2 * calc_complete(shadow_grid)
-                    cfg_score += 0.2 * calc_bumpiness(shadow_grid)
-                    cfg_score += 0.2 * calc_max_height(shadow_grid)
+                    cfg_score += 0.1 * calc_bumpiness(shadow_grid)
+                    cfg_score += 0.1 * calc_max_height(shadow_grid)
+                    cfg_score += 0.3 * (grid_width - _c)
                     cfg_scores.append(cfg_score)
 
                     erase_tetromino(shadow_grid, shape, _c - 1, _r)
