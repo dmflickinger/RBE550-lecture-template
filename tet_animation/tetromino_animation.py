@@ -276,24 +276,21 @@ def render_background(dh, bg_img):
     dh.rectangle([0, 0, width, grid_sq], fill=ega_colors[4])
 
     # draw low-res WPI logo
-    # FIXME: image overlay not working
-
-
     try:
         overlay_image = Image.open("/usr/local/share/texmf/tex/latex/RBElecture/fig/WPI_lowres.png")
     except FileNotFoundError:
         print("failed to load overlay image for WPI logo")
         exit()
 
-    bg_img.paste(overlay_image, (200, 250), overlay_image)
+    bg_img.paste(overlay_image, (204, 180), overlay_image)
 
     #  draw text at bottom, saying "LOADING LECTURE n ..."
     font = ImageFont.truetype("/usr/share/fonts/googlefonts/Orbitron-800.ttf", size=30)
 
     lecture_num = 0 # FIXME: get lecture number from command line argument
     text_content = f"LOADING LECTURE #{lecture_num} ..."
-    text_color = (0, 0, 0)  # White color (RGB)
-    text_position = (5, 300)     # X, Y coordinates
+    text_color = (0, 0, 0)
+    text_position = (5, 300)
 
     dh.text(text_position, text_content, fill=text_color, font=font)
 
@@ -367,10 +364,6 @@ while frame_count < 100000:
 
 
 
-    # img = Image.new('P', (width, height), color=0)
-    # draw = ImageDraw.Draw(img)
-
-    # render_background(draw, img)
     # render_debug(y_goal, rot_count, draw)
     render_grid(main_grid, draw)
 
