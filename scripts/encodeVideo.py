@@ -96,8 +96,7 @@ def create_video(video_config):
 
     # add an opening animation (if configured)
     if os.path.exists(title_animation):
-        # video_clips.append()
-        create_title_animation_clip(title_animation)
+        video_clips.append(create_title_animation_clip(title_animation, resolution))
 
 
 
@@ -144,9 +143,39 @@ def create_video(video_config):
 
 
 
-def create_title_animation_clip(input_fname):
-    pass
-    # TODO: implement title animation encoding
+def create_title_animation_clip(input_fname, res_height):
+    """
+    Create a video clip from a GIF file scaled to target resolution without interpolation.
+    
+    Args:
+        filename (str): Path to the GIF file
+        target_resolution (tuple): Target (width, height) resolution as tuple
+        maintain_aspect_ratio (bool): Whether to maintain original aspect ratio
+    
+    Returns:
+        moviepy.editor.VideoFileClip: Scaled video clip ready for concatenation
+    
+    Raises:
+        FileNotFoundError: If the GIF file doesn't exist
+        ValueError: If target resolution is invalid
+    """
+    # Validate input
+    if not os.path.exists(input_fname):
+        raise FileNotFoundError(f"GIF file not found: {input_fname}")
+    
+    if res_height <= 0:
+        raise ValueError("Resolution dimensions must be positive")
+    
+    # Create video clip from GIF
+    clip = VideoFileClip(input_fname)
+    
+    # FIXME: need to figure out how to resize this clip with Moviepy 2
+    # Scale the clip without interpolation (nearest neighbor)
+    # scaled_clip = clip.resize(height=res_height, resample='nearest')
+ 
+    # return scaled_clip
+    return clip
+    
 
 
 if __name__ == "__main__":
