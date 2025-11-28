@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import argparse
+import pathlib
 
 import random
 import math
@@ -301,7 +302,7 @@ def render_background(dh, bg_img, lecture_num):
 parser = argparse.ArgumentParser(description="create a title slide animation with tetrominoes")
 parser.add_argument("--lecture_num", "-n", type=int, default=0, help="Lecture number")
 parser.add_argument("--duration", "-d", type=int, default=5, help="Duration (seconds)")
-# TODO: also take a command line argument for the output file name
+parser.add_argument("-output", "-o", type=pathlib.Path, default="tetromino_animation.gif", help="Output file name")
 
 args = parser.parse_args()
 
@@ -401,7 +402,7 @@ print(f"{len(frames)} frames generated, writing {frames_required} frames (step {
 
 # Save all frames as an animated GIF
 frames[0].save(
-    'tetromino_animation.gif',
+    args.output,
     save_all=True,
     append_images=selected_frames[1:],
     duration=1000/fps,  # Duration between frames in ms
