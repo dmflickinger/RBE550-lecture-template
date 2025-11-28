@@ -27,3 +27,4 @@ audioGenerator/output.wav
 venv
 simple_midi.mid
 *.sf2
+tet_animation/tetromino_animation.gif

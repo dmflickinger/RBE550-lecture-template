@@ -291,7 +291,7 @@ frame_count = 0
 move_count = 0
 rot_count = 0
 
-while frame_count < 1000:
+while frame_count < 100000:
 
     frame_count += 1
     
@@ -355,15 +355,25 @@ while frame_count < 1000:
     frames.append(rgb_img)
 
 
-print(f"{len(frames)} frames generated")
+
+fps = 20
+clip_duration = 5 # seconds
+
+frames_required = clip_duration * fps
+frame_step = math.floor(len(frames) / frames_required)
+
+selected_frames = frames[::frame_step]
+
+print(f"{len(frames)} frames generated, writing {frames_required} frames (step {frame_step})")
+
 
 
 # Save all frames as an animated GIF
 frames[0].save(
     'tetromino_animation.gif',
     save_all=True,
-    append_images=frames[1:],
-    duration=1,  # Duration between frames in ms
+    append_images=selected_frames[1:],
+    duration=1000/fps,  # Duration between frames in ms
     loop=0        # Loop indefinitely
 )
 
