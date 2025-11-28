@@ -365,7 +365,7 @@ while frame_count < 100000:
 
 
 
-fps = 20
+fps = 30
 clip_duration = 5 # seconds
 
 frames_required = clip_duration * fps
