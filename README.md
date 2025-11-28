@@ -18,6 +18,8 @@ Obtain the [RBE resources](https://github.com/dmflickinger/RBE550resources) proj
 ## Build
 
 ```sh
-docker build -t rbe-lecture-template .
+podman build -t rbe-lecture-template .
 podman run --rm -v .:/source -v ./output:/output -v ./bib:/bib rbe-lecture-template
 ```
+
+<!-- TODO: update documentation, write how to create a new lecture, how to use container, make options, etc. -->
