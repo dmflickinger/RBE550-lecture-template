@@ -279,9 +279,8 @@ def render_background(dh, bg_img):
     # FIXME: image overlay not working
 
 
-    # FIXME: pull image from container FS
     try:
-        overlay_image = Image.open("../template/fig/WPI_lowres.png")
+        overlay_image = Image.open("/usr/local/share/texmf/tex/latex/RBElecture/fig/WPI_lowres.png")
     except FileNotFoundError:
         print("failed to load overlay image for WPI logo")
         exit()
