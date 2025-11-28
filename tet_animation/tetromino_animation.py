@@ -1,4 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
+import argparse
+
 import random
 import math
 
@@ -265,7 +267,7 @@ def render_debug(target_row, turns_remaining, dh):
         ], fill=ega_colors[15])
         
 
-def render_background(dh, bg_img):
+def render_background(dh, bg_img, lecture_num):
     """ render the background
     """
 
@@ -287,13 +289,20 @@ def render_background(dh, bg_img):
     #  draw text at bottom, saying "LOADING LECTURE n ..."
     font = ImageFont.truetype("/usr/share/fonts/googlefonts/Orbitron-800.ttf", size=30)
 
-    lecture_num = 0 # FIXME: get lecture number from command line argument
     text_content = f"LOADING LECTURE #{lecture_num} ..."
     text_color = (0, 0, 0)
     text_position = (5, 300)
 
     dh.text(text_position, text_content, fill=text_color, font=font)
 
+
+
+parser = argparse.ArgumentParser(description="create a title slide animation with tetrominoes")
+parser.add_argument("--lecture_num", "-n", type=int, default=0, help="Lecture number")
+parser.add_argument("--duration", "-d", type=int, default=5, help="Duration (seconds)")
+# TODO: also take a command line argument for the output file name
+
+args = parser.parse_args()
 
 # Create a list to hold all frames
 frames = []
@@ -315,7 +324,7 @@ rot_count = 0
 img = Image.new('P', (width, height), color=0)
 draw = ImageDraw.Draw(img)
 
-render_background(draw, img)
+render_background(draw, img, args.lecture_num)
 
 while frame_count < 100000:
 
@@ -378,7 +387,7 @@ while frame_count < 100000:
 
 
 fps = 30
-clip_duration = 5 # seconds
+clip_duration = args.duration # seconds
 
 frames_required = clip_duration * fps
 frame_step = math.floor(len(frames) / frames_required)
