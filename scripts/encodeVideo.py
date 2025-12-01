@@ -1,6 +1,6 @@
 import os
 from PyPDF2 import PdfReader
-from moviepy import *
+from moviepy import VideoFileClip, ImageClip, AudioFileClip, ImageSequenceClip, VideoClip, concatenate_videoclips
 
 from pathlib import Path
 from natsort import natsorted
@@ -136,7 +136,7 @@ def create_video(video_config):
     print(f"DONE adding {len(video_clips)} slides.")
 
     # Concatenate the clips
-    final_video = concatenate_videoclips(video_clips)
+    final_video = concatenate_videoclips(video_clips, method="compose")
 
     # Write the final video to file
     final_video.write_videofile(output_file, fps=24)
@@ -168,13 +168,9 @@ def create_title_animation_clip(input_fname, res_height):
     
     # Create video clip from GIF
     clip = VideoFileClip(input_fname)
-    
-    # FIXME: need to figure out how to resize this clip with Moviepy 2
-    # Scale the clip without interpolation (nearest neighbor)
-    # scaled_clip = clip.resize(height=res_height, resample='nearest')
+    scaled_clip = clip.resized(height=res_height)
  
-    # return scaled_clip
-    return clip
+    return scaled_clip
     
 
 
