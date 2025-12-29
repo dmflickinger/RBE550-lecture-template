@@ -96,7 +96,7 @@ def create_video(video_config):
 
     # add an opening animation (if configured)
     if os.path.exists(title_animation):
-        video_clips.append(create_title_animation_clip(title_animation, resolution))
+        video_clips.append(create_title_animation_clip(title_animation, resolution).with_audio(AudioFileClip(title_audiofile)))
 
 
 
@@ -109,7 +109,8 @@ def create_video(video_config):
             # First slide is the title
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(title_audiofile).duration)
             slide_clip = ImageClip(image_files[idx]).with_duration(5.0) # FIXME: create title audio file of correct duration
-            video_clips.append(slide_clip.with_audio(AudioFileClip(title_audiofile)))
+            video_clips.append(slide_clip)
+            # video_clips.append(slide_clip.with_audio(AudioFileClip(title_audiofile)))
             print(f"Added title slide {slide_idx} with duration {slide_clip.duration}.")
 
         elif slide_idx in outline_slides:
