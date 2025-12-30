@@ -1,0 +1,52 @@
+digraph G {
+
+    graph [fontname = "Jura"];
+    node [fontname = "Jura", shape="rectangle", fontcolor=black];
+    edge [fontname = "Jura"];
+
+
+	init [label="init", color="lawngreen"];
+
+	emptyO [label="OPEN\nis empty?", shape="diamond"];
+
+	term1 [label="terminate", color="crimson", shape="doubleoctagon"];
+	term2 [label="terminate", color="crimson", shape="doubleoctagon"];
+
+
+	pickNbest [label="pop best node from OPEN\nadd it to CLOSED"];
+
+
+	nBestEQgoal [label="is best node\nat goal?", shape="diamond"];
+
+
+	expandNodes [label="expand all nodes X that are neighbors\nof best node and not in CLOSED"];
+
+	xNOTinO [label="x is not\nin OPEN?", shape="diamond"];
+
+
+	updateBx [label="update heuristics and cost"];
+
+	addTOo [label="add x to OPEN"];
+
+
+	init -> emptyO;
+
+	emptyO -> term1 [label="Y"];
+	emptyO -> pickNbest [label="N"];
+
+	pickNbest -> nBestEQgoal;
+
+	nBestEQgoal -> term2 [label="Y"];
+	nBestEQgoal -> expandNodes [label="N"];
+
+	expandNodes -> xNOTinO;
+
+	xNOTinO -> addTOo [label="Y"];
+	xNOTinO -> updateBx [label="N"];
+
+	addTOo -> emptyO;
+	updateBx -> emptyO;
+
+}
+
+

@@ -1,6 +1,6 @@
 import os
 from PyPDF2 import PdfReader
-from moviepy import *
+from moviepy import VideoFileClip, ImageClip, AudioFileClip, ImageSequenceClip, VideoClip, concatenate_videoclips
 
 from pathlib import Path
 from natsort import natsorted
@@ -8,6 +8,8 @@ from natsort import natsorted
 import yaml
 
 import argparse
+import pathlib
+
 
 def create_video(video_config):
 
@@ -19,6 +21,7 @@ def create_video(video_config):
     outline_audiofile = video_config.get('outline_audiofile')
     output_file = video_config.get('output_file')
     resolution = video_config.get('resolution')
+    title_animation = video_config.get('title_animation')
 
     # Load the PDF file
     pdf = PdfReader(pdf_file)
@@ -91,6 +94,12 @@ def create_video(video_config):
     # Initialize the video clips list
     video_clips = []
 
+    # add an opening animation (if configured)
+    if os.path.exists(title_animation):
+        video_clips.append(create_title_animation_clip(title_animation, resolution).with_audio(AudioFileClip(title_audiofile)))
+
+
+
     # Create a video clip for each page and its corresponding audio
     for idx in range(num_pages):
         slide_idx = idx + 1
@@ -100,7 +109,8 @@ def create_video(video_config):
             # First slide is the title
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(title_audiofile).duration)
             slide_clip = ImageClip(image_files[idx]).with_duration(5.0) # FIXME: create title audio file of correct duration
-            video_clips.append(slide_clip.with_audio(AudioFileClip(title_audiofile)))
+            video_clips.append(slide_clip)
+            # video_clips.append(slide_clip.with_audio(AudioFileClip(title_audiofile)))
             print(f"Added title slide {slide_idx} with duration {slide_clip.duration}.")
 
         elif slide_idx in outline_slides:
@@ -127,18 +137,52 @@ def create_video(video_config):
     print(f"DONE adding {len(video_clips)} slides.")
 
     # Concatenate the clips
-    final_video = concatenate_videoclips(video_clips)
+    final_video = concatenate_videoclips(video_clips, method="compose")
 
     # Write the final video to file
     final_video.write_videofile(output_file, fps=24)
 
 
+
+def create_title_animation_clip(input_fname, res_height):
+    """
+    Create a video clip from a GIF file scaled to target resolution without interpolation.
+    
+    Args:
+        filename (str): Path to the GIF file
+        target_resolution (tuple): Target (width, height) resolution as tuple
+        maintain_aspect_ratio (bool): Whether to maintain original aspect ratio
+    
+    Returns:
+        moviepy.editor.VideoFileClip: Scaled video clip ready for concatenation
+    
+    Raises:
+        FileNotFoundError: If the GIF file doesn't exist
+        ValueError: If target resolution is invalid
+    """
+    # Validate input
+    if not os.path.exists(input_fname):
+        raise FileNotFoundError(f"GIF file not found: {input_fname}")
+    
+    if res_height <= 0:
+        raise ValueError("Resolution dimensions must be positive")
+    
+    # Create video clip from GIF
+    clip = VideoFileClip(input_fname)
+    scaled_clip = clip.resized(height=res_height)
+ 
+    return scaled_clip
+    
+
+
 if __name__ == "__main__":
 
+    # TODO: use pathlib for all filename parameters
     parser = argparse.ArgumentParser(description="Encode a video from PDF and a directory of audio files")
     parser.add_argument("pdf", help="path to PDF file with slides")
     parser.add_argument("slides", help="slides configuration file (YAML)")
     parser.add_argument("audio_dir", help="directory with audio files (one per slide)")
+    parser.add_argument("title_animation", type=pathlib.Path, help="filename for title animation file")
     parser.add_argument("title_audio", help="filename for title audio file")
     parser.add_argument("outline_audio", help="filename for outline audio file")
     parser.add_argument("video_output", help="video output file")
@@ -154,6 +198,9 @@ if __name__ == "__main__":
     if not os.path.exists(args.audio_dir):
         raise ValueError(f"Audio directory {args.audio_dir} does not exist.")
     
+    if not os.path.exists(args.title_animation):
+        raise ValueError(f"Title audio file {args.title_animation} does not exist.")
+
     if not os.path.exists(args.title_audio):
         raise ValueError(f"Title audio file {args.title_audio} does not exist.")
     
@@ -167,6 +214,7 @@ if __name__ == "__main__":
         'pdf_file': args.pdf,
         'slides_cfg': args.slides,
         'audio_dir': args.audio_dir,
+        'title_animation': args.title_animation,
         'title_audiofile': args.title_audio,
         'outline_audiofile': args.outline_audio,
         'output_file': args.video_output,

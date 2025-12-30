@@ -27,5 +27,5 @@ if __name__ == "__main__":
 
         page_idx = 1
         for page in reader.pages:
-            save_mp3(page.extract_text(), f"{args.output}/slide_{page_idx}")
+            save_mp3(page.extract_text(), f"{args.output}/segment_{page_idx}")
             page_idx += 1

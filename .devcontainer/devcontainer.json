@@ -4,21 +4,14 @@
     "name": "RBE Lecture Template",
     "context": "..",
     "image": "ubuntu:latest",
-    // "dockerFile": "Dockerfile",
-
+ 	"runArgs": [ "--device=/dev/snd"],
 	"postCreateCommand": "./.devcontainer/installDepsAndTemplates.sh",
     "customizations": {
-		"vscode": {
-			"extensions": [
-				"Gruntfuggly.todo-tree",
-				"mutantdino.resourcemonitor",
-				"DavidAnson.vscode-markdownlint",
-				"ms-vscode.makefile-tools",
-				"joaompinto.vscode-graphviz",
-				"ms-azuretools.vscode-docker",
-				"streetsidesoftware.code-spell-checker",
-				"James-Yu.latex-workshop"
-			]
+        "vscode": {
+            "extensions": [
+                "ms-vscode.makefile-tools",
+                "James-Yu.latex-workshop"
+            ]
 		}
 	}
 }

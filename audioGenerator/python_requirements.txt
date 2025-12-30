@@ -1,0 +1,14 @@
+pyyaml
+numpy
+scipy
+python-rtmidi
+PyFluidSynth
+pydub
+PyPDF2
+moviepy
+natsort
+pathlib
+gtts
+midiutil
+midi2audio
+pdf2image

@@ -1,3 +1,6 @@
 template/fig/WPI_background_logo_corner.png filter=lfs diff=lfs merge=lfs -text
 template/fig/WPI_background_logo.png filter=lfs diff=lfs merge=lfs -text
 template/fig/WPI_Inst_Prim_FulClr.png filter=lfs diff=lfs merge=lfs -text
+template/fig/WPI_lowres.png filter=lfs diff=lfs merge=lfs -text
+synth_transitions/outline_slide.mp3 filter=lfs diff=lfs merge=lfs -text
+synth_transitions/title_slide.mp3 filter=lfs diff=lfs merge=lfs -text

@@ -28,9 +28,8 @@ source /lecturetemplate/venv/bin/activate
 # Install resources (bibliography)
 # --------------------------------
 
-rm -rf bib
-git clone https://github.com/dmflickinger/RBE550resources.git bib
-ln -s ${PWD}/bib /bib
+rm -rf /bib
+git clone https://github.com/dmflickinger/RBE550resources.git /bib
 
 # Install assignments template
 # ----------------------------
@@ -52,3 +51,8 @@ mktexlsr $(kpsewhich -var-value=TEXMFLOCAL)
 
 cp -f scripts/encodeVideo.py /usr/local/bin/
 cp -f scripts/buildLectureVideo.sh /usr/local/bin/
+
+# Install the sounds
+# ---------------------------------
+
+cp -rf synth_transitions /lecturetemplate/

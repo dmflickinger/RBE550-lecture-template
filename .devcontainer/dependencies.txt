@@ -25,3 +25,11 @@ python3-pip
 python3-venv
 locales
 npm
+mplayer
+libasound-dev
+python3-dev
+fluidsynth
+ffmpeg
+alsa-utils
+libavutil-dev
+lame
