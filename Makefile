@@ -9,4 +9,5 @@ lecture_number = 0
 export lecture_number
 
 include lecture_document.mk
+include lecture_audio.mk
 include lecture_builder.mk
