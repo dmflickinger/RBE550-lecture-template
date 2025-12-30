@@ -116,7 +116,7 @@ def create_video(video_config):
         elif slide_idx in outline_slides:
             # Outline slide
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(outline_audiofile).duration)
-            slide_clip = ImageClip(image_files[idx]).with_duration(3.0) # FIXME: create outline audio file of correct duration
+            slide_clip = ImageClip(image_files[idx]).with_duration(5.0) # FIXME: create outline audio file of correct duration
             video_clips.append(slide_clip.with_audio(AudioFileClip(outline_audiofile)))
             print(f"Added outline slide {slide_idx} with duration {slide_clip.duration}")
 
