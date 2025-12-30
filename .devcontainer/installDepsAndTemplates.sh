@@ -51,8 +51,11 @@ mktexlsr $(kpsewhich -var-value=TEXMFLOCAL)
 
 cp -f scripts/encodeVideo.py /usr/local/bin/
 cp -f scripts/buildLectureVideo.sh /usr/local/bin/
+cp -f scripts/createAudioFiles.py /usr/local/bin/
 
-# Install the sounds
-# ---------------------------------
+# Install the sounds and other utilities
+# ---------------------------------------
 
 cp -rf synth_transitions /lecturetemplate/
+cp -rf audioGenerator /lecturetemplate/
+cp -rf tet_animation /lecturetemplate/
