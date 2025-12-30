@@ -24,12 +24,13 @@ install: document video
 	cp -f $(lecture_name).pdf /output/
 	cp -f $(lecture_name).mp4 /output/
 
+audioclean:
+	rm -rf audio_output
 
 clean :
 	rm -f $(lecture_name).pdf
 	rm -f $(lecture_name).m4v
 	rm -f $(lecture_name).mp4
-	rm -rf audio_output
 	rm -rf audio_transitions
 	rm -rf slide_output
 	rm -rf animation_output
