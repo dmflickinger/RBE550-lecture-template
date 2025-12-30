@@ -49,7 +49,7 @@ titleanim: venv
 
 video: venv document audio testaudio titleanim
 	mkdir -p slide_output
-	$(VENV_ACTIVATE) && python3 scripts/encodeVideo.py $(lecture_name).pdf $(lecture_name).yaml audio_output animation_output/title_$(lecture_number)_$(lecture_name).gif synth_transitions/title_slide.mp3 synth_transitions/outline_slide.mp3 $(lecture_name).mp4
+	$(VENV_ACTIVATE) && python3 scripts/encodeVideo.py $(lecture_name).pdf $(lecture_name).yaml audio_output animation_output/title_$(lecture_number)_$(lecture_name).gif /lecturetemplate/synth_transitions/title_slide.mp3 /lecturetemplate/synth_transitions/outline_slide.mp3 $(lecture_name).mp4
 	rm -rf slide_output
 
 
