@@ -17,8 +17,9 @@ def create_video(video_config):
     pdf_file = video_config.get('pdf_file')
     slides_cfg = video_config.get('slides_cfg')
     audio_dir = video_config.get('audio_dir')
-    title_audiofile = video_config.get('title_audiofile')
-    outline_audiofile = video_config.get('outline_audiofile')
+    title_audiofile = ''
+    outline_audiofile = ''
+    endbuffer_audiofile = ''
     output_file = video_config.get('output_file')
     resolution = video_config.get('resolution')
     title_animation = video_config.get('title_animation')
@@ -49,12 +50,14 @@ def create_video(video_config):
     with open(slides_cfg, 'r') as yaml_file:
         slides_config = yaml.safe_load(yaml_file)
     slides_list = slides_config.get('slides', [])
+    audio_list = slides_config.get('audio', [])
     print(f"Loaded slides configuration: {yaml_file}")
 
     # Process each slide dictionary in the list
     special_slides = set()
     title_slide = set()
     outline_slides = set()
+    endbuffer_slides = set()
 
     for slide_dict in slides_list:
         for field in ['titleslide']:
@@ -68,7 +71,14 @@ def create_video(video_config):
                 elif isinstance(slide_dict[field], int):
                     outline_slides.add(slide_dict[field])
 
-        for field in ['endbuffer', 'sources', 'urls', 'endslide']:
+        for field in ['endbuffer']:
+            if field in slide_dict:
+                if isinstance(slide_dict[field], dict):
+                    endbuffer_slides.update(slide_dict[field].keys())
+                elif isinstance(slide_dict[field], int):
+                    endbuffer_slides.add(slide_dict[field])
+
+        for field in ['sources', 'urls', 'endslide']:
             if field in slide_dict:
                 if isinstance(slide_dict[field], dict):
                     # Handle format like {2: None, 4: None, ...}
@@ -79,10 +89,27 @@ def create_video(video_config):
         
     print(f"Title slide: {title_slide}")
     print(f"Outline slides: {outline_slides}")
+    print(f"Endbuffer slides: {endbuffer_slides}")
     print(f"Special slides: {sorted(special_slides)}")
 
 
+    # Process the audio transition file paths
+    for audio_dict in audio_list:
+        for field in ['title']:
+            if field in audio_dict:
+                title_audiofile = audio_dict[field]
+        for field in ['outline']:
+            if field in audio_dict:
+                outline_audiofile = audio_dict[field]
+        for field in ['endbuffer']:
+            if field in audio_dict:
+                endbuffer_audiofile = audio_dict[field]
 
+    print(f"Title slide audio file: {title_audiofile}")
+    print(f"Outline slide audio file: {outline_audiofile}")
+    print(f"End buffer slide audio file: {endbuffer_audiofile}")
+
+    
     # Get the list of MP3 files from the directory
     audio_path = Path(audio_dir)
     for filename in natsorted(audio_path.iterdir(), key=lambda x: x.name):
@@ -108,7 +135,7 @@ def create_video(video_config):
         if slide_idx in title_slide:
             # First slide is the title
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(title_audiofile).duration)
-            slide_clip = ImageClip(image_files[idx]).with_duration(5.0) # FIXME: create title audio file of correct duration
+            slide_clip = ImageClip(image_files[idx]).with_duration(7.0)
             video_clips.append(slide_clip)
             # video_clips.append(slide_clip.with_audio(AudioFileClip(title_audiofile)))
             print(f"Added title slide {slide_idx} with duration {slide_clip.duration}.")
@@ -116,13 +143,19 @@ def create_video(video_config):
         elif slide_idx in outline_slides:
             # Outline slide
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(outline_audiofile).duration)
-            slide_clip = ImageClip(image_files[idx]).with_duration(5.0) # FIXME: create outline audio file of correct duration
+            slide_clip = ImageClip(image_files[idx]).with_duration(7.0)
             video_clips.append(slide_clip.with_audio(AudioFileClip(outline_audiofile)))
             print(f"Added outline slide {slide_idx} with duration {slide_clip.duration}")
 
+        elif slide_idx in endbuffer_slides:
+            # Endbuffer slide
+            slide_clip = ImageClip(image_files[idx]).with_duration(7.0)
+            video_clips.append(slide_clip.with_audio(AudioFileClip(endbuffer_audiofile)))
+            print(f"Added end buffer slide {slide_idx} with duration {slide_clip.duration}")
+
         elif slide_idx in special_slides:
             # Other special slides
-            slide_clip = ImageClip(image_files[idx]).with_duration(3.0)
+            slide_clip = ImageClip(image_files[idx]).with_duration(5.0)
             video_clips.append(slide_clip)
             print(f"Added special slide {slide_idx} with duration {slide_clip.duration}")
 
@@ -183,8 +216,6 @@ if __name__ == "__main__":
     parser.add_argument("slides", help="slides configuration file (YAML)")
     parser.add_argument("audio_dir", help="directory with audio files (one per slide)")
     parser.add_argument("title_animation", type=pathlib.Path, help="filename for title animation file")
-    parser.add_argument("title_audio", help="filename for title audio file")
-    parser.add_argument("outline_audio", help="filename for outline audio file")
     parser.add_argument("video_output", help="video output file")
     parser.add_argument("--resolution", type=int, default=1080, help="resolution of the PDF pages (default: 1080)")
     args = parser.parse_args()
@@ -201,13 +232,6 @@ if __name__ == "__main__":
     if not os.path.exists(args.title_animation):
         raise ValueError(f"Title audio file {args.title_animation} does not exist.")
 
-    if not os.path.exists(args.title_audio):
-        raise ValueError(f"Title audio file {args.title_audio} does not exist.")
-    
-    if not os.path.exists(args.outline_audio):
-        raise ValueError(f"Outline audio file {args.outline_audio} does not exist.")
-    
-
 
     # Create video config dictionary
     video_config = {
@@ -215,8 +239,6 @@ if __name__ == "__main__":
         'slides_cfg': args.slides,
         'audio_dir': args.audio_dir,
         'title_animation': args.title_animation,
-        'title_audiofile': args.title_audio,
-        'outline_audiofile': args.outline_audio,
         'output_file': args.video_output,
         'resolution': args.resolution
     }
