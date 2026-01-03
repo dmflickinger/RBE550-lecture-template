@@ -16,7 +16,7 @@ titleanim: venv
 
 video: venv titleanim $(lecture_name).pdf
 	mkdir -p slide_output
-	$(VENV_ACTIVATE) && python3 /usr/local/bin/encodeVideo.py $(lecture_name).pdf $(lecture_name).yaml audio_output animation_output/title_$(lecture_number)_$(lecture_name).gif /lecturetemplate/synth_transitions/title_slide.mp3 /lecturetemplate/synth_transitions/outline_slide.mp3 /lecturetemplate/synth_transitions/outline_slide.mp3 $(lecture_name).mp4
+	$(VENV_ACTIVATE) && python3 /usr/local/bin/encodeVideo.py $(lecture_name).pdf $(lecture_name).yaml audio_output animation_output/title_$(lecture_number)_$(lecture_name).gif $(lecture_name).mp4
 	rm -rf slide_output
 # FIXME: get audio file for endbuffer
 

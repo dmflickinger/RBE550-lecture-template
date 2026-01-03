@@ -7,3 +7,7 @@ slides:
   - sources: {14}
   - urls: 15
   - endslide: 16
+audio:
+  - title: /lecturetemplate/synth_transitions/title_slide.mp3
+  - outline: /lecturetemplate/synth_transitions/outline_slide.mp3
+  - endbuffer: /lecturetemplate/synth_transitions/outline_slide.mp3
