@@ -108,7 +108,7 @@ def create_video(video_config):
         if slide_idx in title_slide:
             # First slide is the title
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(title_audiofile).duration)
-            slide_clip = ImageClip(image_files[idx]).with_duration(5.0) # FIXME: create title audio file of correct duration
+            slide_clip = ImageClip(image_files[idx]).with_duration(7.0) # FIXME: create title audio file of correct duration
             video_clips.append(slide_clip)
             # video_clips.append(slide_clip.with_audio(AudioFileClip(title_audiofile)))
             print(f"Added title slide {slide_idx} with duration {slide_clip.duration}.")
@@ -116,13 +116,13 @@ def create_video(video_config):
         elif slide_idx in outline_slides:
             # Outline slide
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(outline_audiofile).duration)
-            slide_clip = ImageClip(image_files[idx]).with_duration(5.0) # FIXME: create outline audio file of correct duration
+            slide_clip = ImageClip(image_files[idx]).with_duration(7.0) # FIXME: create outline audio file of correct duration
             video_clips.append(slide_clip.with_audio(AudioFileClip(outline_audiofile)))
             print(f"Added outline slide {slide_idx} with duration {slide_clip.duration}")
 
         elif slide_idx in special_slides:
             # Other special slides
-            slide_clip = ImageClip(image_files[idx]).with_duration(3.0)
+            slide_clip = ImageClip(image_files[idx]).with_duration(5.0)
             video_clips.append(slide_clip)
             print(f"Added special slide {slide_idx} with duration {slide_clip.duration}")
 
