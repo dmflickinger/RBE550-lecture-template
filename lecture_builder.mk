@@ -2,12 +2,12 @@
 # Date: 2025
 # Author: Daniel Montrallo Flickinger, PhD ; dflickinger@wpi.edu
 
-VENV_ACTIVATE = . /lecturetemplate/venv/bin/activate
+VENV_ACTIVATE = . venv/bin/activate
 
 all : document video
 
 venv:
-	python3 -m venv /lecturetemplate/venv
+	python3 -m venv venv
 	$(VENV_ACTIVATE) && python3 -m pip install -r /lecturetemplate/audioGenerator/python_requirements.txt
 
 titleanim: venv
@@ -18,7 +18,6 @@ video: venv titleanim $(lecture_name).pdf
 	mkdir -p slide_output
 	$(VENV_ACTIVATE) && python3 /usr/local/bin/encodeVideo.py $(lecture_name).pdf $(lecture_name).yaml audio_output animation_output/title_$(lecture_number)_$(lecture_name).gif $(lecture_name).mp4
 	rm -rf slide_output
-# FIXME: get audio file for endbuffer
 
 
 install: document video
