@@ -19,6 +19,7 @@ def create_video(video_config):
     audio_dir = video_config.get('audio_dir')
     title_audiofile = video_config.get('title_audiofile')
     outline_audiofile = video_config.get('outline_audiofile')
+    endbuffer_audiofile = video_config.get('endbuffer_audiofile')
     output_file = video_config.get('output_file')
     resolution = video_config.get('resolution')
     title_animation = video_config.get('title_animation')
@@ -55,6 +56,7 @@ def create_video(video_config):
     special_slides = set()
     title_slide = set()
     outline_slides = set()
+    endbuffer_slides = set()
 
     for slide_dict in slides_list:
         for field in ['titleslide']:
@@ -68,7 +70,14 @@ def create_video(video_config):
                 elif isinstance(slide_dict[field], int):
                     outline_slides.add(slide_dict[field])
 
-        for field in ['endbuffer', 'sources', 'urls', 'endslide']:
+        for field in ['endbuffer']:
+            if field in slide_dict:
+                if isinstance(slide_dict[field], dict):
+                    endbuffer_slides.update(slide_dict[field].keys())
+                elif isinstance(slide_dict[field], int):
+                    endbuffer_slides.add(slide_dict[field])
+
+        for field in ['sources', 'urls', 'endslide']:
             if field in slide_dict:
                 if isinstance(slide_dict[field], dict):
                     # Handle format like {2: None, 4: None, ...}
@@ -79,6 +88,7 @@ def create_video(video_config):
         
     print(f"Title slide: {title_slide}")
     print(f"Outline slides: {outline_slides}")
+    print(f"Endbuffer slides: {endbuffer_slides}")
     print(f"Special slides: {sorted(special_slides)}")
 
 
@@ -108,7 +118,7 @@ def create_video(video_config):
         if slide_idx in title_slide:
             # First slide is the title
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(title_audiofile).duration)
-            slide_clip = ImageClip(image_files[idx]).with_duration(7.0) # FIXME: create title audio file of correct duration
+            slide_clip = ImageClip(image_files[idx]).with_duration(7.0)
             video_clips.append(slide_clip)
             # video_clips.append(slide_clip.with_audio(AudioFileClip(title_audiofile)))
             print(f"Added title slide {slide_idx} with duration {slide_clip.duration}.")
@@ -116,9 +126,15 @@ def create_video(video_config):
         elif slide_idx in outline_slides:
             # Outline slide
             # slide_clip = ImageClip(image_files[idx]).with_duration(AudioFileClip(outline_audiofile).duration)
-            slide_clip = ImageClip(image_files[idx]).with_duration(7.0) # FIXME: create outline audio file of correct duration
+            slide_clip = ImageClip(image_files[idx]).with_duration(7.0)
             video_clips.append(slide_clip.with_audio(AudioFileClip(outline_audiofile)))
             print(f"Added outline slide {slide_idx} with duration {slide_clip.duration}")
+
+        elif slide_idx in endbuffer_slides:
+            # Endbuffer slide
+            slide_clip = ImageClip(image_files[idx]).with_duration(7.0)
+            video_clips.append(slide_clip.with_audio(AudioFileClip(endbuffer_audiofile)))
+            print(f"Added end buffer slide {slide_idx} with duration {slide_clip.duration}")
 
         elif slide_idx in special_slides:
             # Other special slides
@@ -185,6 +201,7 @@ if __name__ == "__main__":
     parser.add_argument("title_animation", type=pathlib.Path, help="filename for title animation file")
     parser.add_argument("title_audio", help="filename for title audio file")
     parser.add_argument("outline_audio", help="filename for outline audio file")
+    parser.add_argument("endbuffer_audio", help="filename for endbuffer audio file")
     parser.add_argument("video_output", help="video output file")
     parser.add_argument("--resolution", type=int, default=1080, help="resolution of the PDF pages (default: 1080)")
     args = parser.parse_args()
@@ -207,7 +224,10 @@ if __name__ == "__main__":
     if not os.path.exists(args.outline_audio):
         raise ValueError(f"Outline audio file {args.outline_audio} does not exist.")
     
-
+    if not os.path.exists(args.endbuffer_audio):
+        raise ValueError(f"End buffer audio file {args.endbuffer_audio} does not exist.")
+    
+    # TODO: move audio file arguments to YAML file instead
 
     # Create video config dictionary
     video_config = {
@@ -217,6 +237,7 @@ if __name__ == "__main__":
         'title_animation': args.title_animation,
         'title_audiofile': args.title_audio,
         'outline_audiofile': args.outline_audio,
+        'endbuffer_audiofile': args.endbuffer_audio,
         'output_file': args.video_output,
         'resolution': args.resolution
     }
