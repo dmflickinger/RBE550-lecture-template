@@ -173,7 +173,11 @@ def create_video(video_config):
     final_video = concatenate_videoclips(video_clips, method="compose")
 
     # Write the final video to file
-    final_video.write_videofile(output_file, fps=24)
+    final_video.write_videofile(output_file,
+                                fps=24,
+                                threads=8,
+                                codec='libx264',
+                                preset="ultrafast")
 
 
 
