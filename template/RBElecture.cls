@@ -28,6 +28,24 @@ courseTitle/.estore in = \myRBEtitleframeCourseTitle,
 lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 }
 
+% Set up fonts
+% ------------
+
+\RequirePackage{fontspec}
+
+
+\usefonttheme{professionalfonts}
+
+\RequirePackage[sfdefault]{FiraSans}
+\setmainfont{Fira Sans}
+
+\newfontfamily{\orbfamily}{Orbitron-800.ttf}
+
+\RequirePackage{fontawesome}
+\usefonttheme[stillsansseriftext,stillsansseriftitle]{serif}
+% \usefonttheme[stillserifsmall,stillseriflarge,stillsansseriftext]{structurebold}
+
+
 % Required Packages
 % -----------------
 
@@ -36,16 +54,6 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 
 \RequirePackage[utf8]{inputenc}
 
-\RequirePackage[sfdefault]{roboto}
-
-\RequirePackage{fontspec}
-\setsansfont{Orbitron-800.ttf}
-
-\usefonttheme{professionalfonts}
-\usefonttheme{serif}
-\setmainfont{roboto}
-
-\RequirePackage{fontawesome}
 
 \RequirePackage{lipsum}
 
@@ -73,7 +81,7 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 % \RequirePackage{helvet}
 % \RequirePackage{sourcecodepro}
 % \RequirePackage{sourceserifpro}
-\RequirePackage{fourier}
+\RequirePackage{fourier-otf}
 % \RequirePackage{ccfonts}
 
 % Or whatever. Note that the encoding and the font should match. If T1
@@ -148,14 +156,14 @@ lectureNumber/.estore in = \myRBEtitleframeLectureNumber,
 right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
 
 
-\setbeamerfont{title}{family=\sffamily\selectfont, shape=\normalfont, series=\bfseries}
-\setbeamerfont{frametitle}{family=\sffamily\selectfont}
-\setbeamerfont{framesubtitle}{family=\sffamily\selectfont}
+\setbeamerfont{title}{family=\orbfamily\selectfont, shape=\normalfont, series=\bfseries}
+\setbeamerfont{frametitle}{family=\orbfamily\selectfont}
+\setbeamerfont{framesubtitle}{family=\orbfamily\selectfont}
 
 \setbeamerfont{normal text}{family=\fontfamily{sansserif}\selectfont}
 
-\setbeamerfont{section in toc}{family=\sffamily\selectfont}
-\setbeamerfont{section in sidebar}{family=\sffamily\selectfont}
+\setbeamerfont{section in toc}{family=\orbfamily\selectfont}
+\setbeamerfont{section in sidebar}{family=\orbfamily\selectfont}
 
 
 
@@ -167,9 +175,6 @@ right}[horizontal shading][right=WPIgrayCrimson,left=WPIcrimson]
     \insertframenumber/\inserttotalframenumber
 }
 
-% \usefonttheme{professionalfonts}
-\usefonttheme[stillsansseriftext,stillsansseriftitle]{serif}
-% \usefonttheme[stillserifsmall,stillseriflarge,stillsansseriftext]{structurebold}
 
 
 
