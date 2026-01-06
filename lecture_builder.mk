@@ -20,9 +20,9 @@ video: venv titleanim $(lecture_name).pdf
 	rm -rf slide_output
 
 
-install: document video
-	cp -f $(lecture_name).pdf /output/
-	cp -f $(lecture_name).mp4 /output/
+install: $(lecture_name).pdf $(lecture_name).mp4
+	mv -f $(lecture_name).pdf /workspace/output/slides
+	mv -f $(lecture_name).mp4 /workspace/output/videos
 
 audioclean:
 	rm -rf audio_output
