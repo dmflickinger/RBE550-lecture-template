@@ -60,3 +60,9 @@ cp -f scripts/createAudioFiles.py /usr/local/bin/
 cp -rf synth_transitions /lecturetemplate/
 cp -rf audioGenerator /lecturetemplate/
 cp -rf tet_animation /lecturetemplate/
+
+# Create output directories
+# -------------------------
+
+mkdir -p /workspace/output/slides
+mkdir -p /workspace/output/videos
